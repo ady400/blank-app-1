@@ -16,7 +16,7 @@ with st.sidebar:
     st.markdown("---")
     st.caption("© 2025 Kelompok 6 - 1F PLI AKA")
 
-# CSS tambahan buat mempercantik
+# CSS tambahan
 st.markdown("""
     <style>
     .main-title {
@@ -24,23 +24,15 @@ st.markdown("""
         color: #2C3E50;
         text-align: center;
         padding: 20px 0;
-        animation: fadeIn 2s;
     }
     .stButton>button {
         background-color: #2C3E50;
         color: white;
     }
-    body {
-        background-color: #f5f9ff;
-    }
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
     </style>
 """, unsafe_allow_html=True)
 
-# BERANDA
+# --- BERANDA ---
 if menu == "🏠 Beranda":
     st.markdown("""
     <div style='text-align: center; padding: 30px 0;'>
@@ -63,7 +55,7 @@ if menu == "🏠 Beranda":
         st.markdown("### Simulasi Interaktif")
         st.write("Lakukan simulasi pengolahan limbah dengan berbagai jenis.")
 
-# PROSES
+# --- PROSES ---
 elif menu == "⚙️ Proses":
     st.markdown('<div class="main-title">⚙️ Tahapan Pengolahan Limbah Industri</div>', unsafe_allow_html=True)
     st.markdown("""
@@ -89,10 +81,12 @@ elif menu == "⚙️ Proses":
     - Limbah cair buangan yang memenuhi standar.
     """)
 
-# UJI LAB
+# --- UJI LAB ---
 elif menu == "🧪 Uji Lab":
     st.markdown('<div class="main-title">🧪 Kalkulator Uji Laboratorium</div>', unsafe_allow_html=True)
     uji = st.selectbox("Pilih jenis uji:", ["COD", "BOD", "TSS", "pH"])
+
+    hasil_data = {}
 
     if uji == "COD":
         v = st.number_input("Volume titran (mL)", value=10.0)
@@ -100,20 +94,16 @@ elif menu == "🧪 Uji Lab":
         vs = st.number_input("Volume sampel (mL)", value=50.0)
         if st.button("Hitung COD"):
             hasil = (v * n * 8000) / vs
+            hasil_data = {"Jenis Uji": "COD", "Hasil (mg/L)": hasil}
             st.success(f"COD = {hasil:.2f} mg/L")
-            buffer = io.StringIO()
-            buffer.write(f"Hasil Uji COD\nVolume titran: {v} mL\nNormalitas: {n} N\nVolume sampel: {vs} mL\n=> COD = {hasil:.2f} mg/L")
-            st.download_button("📄 Unduh Hasil", buffer.getvalue(), file_name="hasil_uji_cod.txt")
 
     elif uji == "BOD":
         awal = st.number_input("DO Awal (mg/L)", value=8.0)
         akhir = st.number_input("DO Akhir (mg/L)", value=2.0)
         if st.button("Hitung BOD"):
             hasil = awal - akhir
+            hasil_data = {"Jenis Uji": "BOD", "Hasil (mg/L)": hasil}
             st.success(f"BOD = {hasil:.2f} mg/L")
-            buffer = io.StringIO()
-            buffer.write(f"Hasil Uji BOD\nDO Awal: {awal} mg/L\nDO Akhir: {akhir} mg/L\n=> BOD = {hasil:.2f} mg/L")
-            st.download_button("📄 Unduh Hasil", buffer.getvalue(), file_name="hasil_uji_bod.txt")
 
     elif uji == "TSS":
         awal = st.number_input("Berat filter awal (mg)", value=100.0)
@@ -121,31 +111,40 @@ elif menu == "🧪 Uji Lab":
         volume = st.number_input("Volume sampel (L)", value=1.0)
         if st.button("Hitung TSS"):
             hasil = (akhir - awal) / volume
+            hasil_data = {"Jenis Uji": "TSS", "Hasil (mg/L)": hasil}
             st.success(f"TSS = {hasil:.2f} mg/L")
-            buffer = io.StringIO()
-            buffer.write(f"Hasil Uji TSS\nBerat awal: {awal} mg\nBerat akhir: {akhir} mg\nVolume: {volume} L\n=> TSS = {hasil:.2f} mg/L")
-            st.download_button("📄 Unduh Hasil", buffer.getvalue(), file_name="hasil_uji_tss.txt")
 
     elif uji == "pH":
         ph = st.slider("pH sampel", 0.0, 14.0, 7.0)
+        hasil_data = {"Jenis Uji": "pH", "Hasil": ph}
         st.info(f"pH = {ph}")
 
-# SIMULASI
+    # Download hasil
+    if hasil_data:
+        df_hasil = pd.DataFrame([hasil_data])
+        buffer = io.BytesIO()
+        with pd.ExcelWriter(buffer, engine='xlsxwriter') as writer:
+            df_hasil.to_excel(writer, index=False, sheet_name='Hasil Uji Lab')
+            writer.save()
+        st.download_button(
+            label="📥 Download Hasil Uji (Excel)",
+            data=buffer.getvalue(),
+            file_name="hasil_uji_lab.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+
+# --- SIMULASI ---
 elif menu == "🧩 Simulasi":
     st.markdown('<div class="main-title">🔄 Simulasi Pengolahan Limbah</div>', unsafe_allow_html=True)
     jenis = st.selectbox("Jenis limbah", ["Organik", "Kimia", "Campuran"])
     awal = st.number_input("Konsentrasi awal (mg/L)", value=500.0)
 
     efisiensi = {"Organik": 0.85, "Kimia": 0.70, "Campuran": 0.60}[jenis]
-    if st.button("▶️ Mulai Simulasi"):
+    if st.button("Mulai Simulasi"):
         akhir = awal * (1 - efisiensi)
         st.success(f"Hasil akhir: {akhir:.2f} mg/L ({efisiensi*100:.0f}% efisiensi)")
 
-        buffer = io.StringIO()
-        buffer.write(f"Simulasi Pengolahan Limbah\nJenis: {jenis}\nKonsentrasi awal: {awal} mg/L\nEfisiensi: {efisiensi*100:.0f}%\n=> Hasil akhir: {akhir:.2f} mg/L")
-        st.download_button("📄 Unduh Hasil", buffer.getvalue(), file_name="hasil_simulasi.txt")
-
-# TENTANG
+# --- TENTANG ---
 elif menu == "ℹ️ Tentang":
     st.markdown('<div class="main-title">ℹ️ Tentang Aplikasi Ini</div>', unsafe_allow_html=True)
     st.write("""
