@@ -8,11 +8,11 @@ st.title("Simulasi Sampling dan Sub-Sampling Produk Industri")
 # -----------------------------
 st.header("1. Sampling Penerimaan Produk (Bilangan Acak)")
 
-N = st.number_input("Ukuran lot (N)", min_value=1, value=1000)
-n = st.number_input("Ukuran sampel (n)", min_value=1, max_value=N, value=50)
-c = st.number_input("Acceptance number (c)", min_value=0, max_value=n, value=2)
+N = st.number_input("Ukuran lot (N)", min_value=1, value=1000, key="lot")
+n = st.number_input("Ukuran sampel (n)", min_value=1, max_value=N, value=50, key="sampel")
+c = st.number_input("Acceptance number (c)", min_value=0, max_value=n, value=2, key="acceptance")
 
-if st.button("Ambil Sampel"):
+if st.button("Ambil Sampel - Bilangan Acak", key="sampling_button"):
     sampel = random.sample(range(1, N + 1), n)
     jumlah_cacat = random.randint(0, n)  # Simulasi jumlah cacat
     produk_cacat = random.sample(sampel, jumlah_cacat)
@@ -33,10 +33,10 @@ if st.button("Ambil Sampel"):
 # -----------------------------
 st.header("2. Sub-Sampling Padatan (Cone and Quartering)")
 
-jumlah_awal = st.number_input("Jumlah awal sampel (gram)", min_value=10, value=1000, step=10)
-jumlah_akhir = st.number_input("Jumlah akhir yang diinginkan (gram)", min_value=1, value=250, step=1)
+jumlah_awal = st.number_input("Jumlah awal sampel (gram)", min_value=10, value=1000, step=10, key="awal")
+jumlah_akhir = st.number_input("Jumlah akhir yang diinginkan (gram)", min_value=1, value=250, step=1, key="akhir")
 
-if st.button("Mulai Cone and Quartering"):
+if st.button("Mulai Sub-Sampling - Cone and Quartering", key="quartering_button"):
     jumlah = jumlah_awal
     langkah = 0
     riwayat = []
