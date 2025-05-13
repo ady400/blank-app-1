@@ -156,3 +156,46 @@ elif menu == "ℹ️ Tentang":
     - **Versi:** 1.0
     - **Sumber:** Modul Teknik Lingkungan, Litbang KLHK
     """)
+
+# ------ KALKULATOR ------
+elif menu == "🧮 Kalkulator":
+    st_lottie(lottie_kalkulator, speed=1, loop=True, quality="high", height=200)
+    st.markdown("<div style='margin-top: 30px'></div>", unsafe_allow_html=True)
+    st.title("🧮 Hitung Sampah Harianmu")
+    st.write("Masukkan jumlah orang & aktivitas harian:")
+
+    people = st.slider("Jumlah orang di rumah", 1, 10, 3)
+    activity = st.selectbox("Tingkat aktivitas harian", ["Normal", "Aktif", "Banyak belanja"])
+
+    base_waste = 0.7
+    if activity == "Aktif":
+        base_waste += 0.2
+    elif activity == "Banyak belanja":
+        base_waste += 0.5
+
+    total = round(people * base_waste, 2)
+    organik = total * 0.6
+    anorganik = total * 0.35
+    b3 = total * 0.05
+
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Total Sampah", f"{total} kg")
+    with col2:
+        st.metric("Sampah per Orang", f"{base_waste:.2f} kg")
+
+    fig = px.pie(
+        names=["Organik", "Anorganik", "B3"],
+        values=[organik, anorganik, b3],
+        color_discrete_sequence=['#81C784', '#4FC3F7', '#FF8A65'],
+        title="Komposisi Sampah"
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown("### Tips")
+    if organik > anorganik:
+        st.success("Mulai kompos dari sekarang!")
+    if anorganik > 1:
+        st.info("Kurangi plastik dan belanja bijak.")
+    if b3 > 0.1:
+        st.warning("Pisahkan limbah B3 seperti baterai!")
