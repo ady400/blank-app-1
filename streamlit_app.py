@@ -475,14 +475,14 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         """)
 
     with col_a2:
-    # Membuat judul "Tentang Pengembang" rata tengah
-    st.markdown("<h3 style='text-align: center;'>👥 Tentang Pengembang</h3>", unsafe_allow_html=True)
+        # Membuat judul "Tentang Pengembang" rata tengah
+        st.markdown("<h3 style='text-align: center;'>👥 Tentang Pengembang</h3>", unsafe_allow_html=True)
     
-    # Membuat spasi vertikal kecil agar rapi
-    st.markdown("<br>", unsafe_allow_html=True)
+        # Membuat spasi vertikal kecil agar rapi
+        st.markdown("<br>", unsafe_allow_html=True)
     
-    # Menggunakan sub-kolom agar posisi kontennya bisa presisi di tengah kolom col_a2
-    sub_col1, sub_col2, sub_col3 = st.columns([1, 4, 1])
+        # Menggunakan sub-kolom agar posisi kontennya bisa presisi di tengah kolom col_a2
+        sub_col1, sub_col2, sub_col3 = st.columns([1, 4, 1])
     
     with sub_col2:
         # Menampilkan detail informasi pengembang dengan format teks biasa
