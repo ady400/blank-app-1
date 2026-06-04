@@ -474,7 +474,7 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         * 🌐 **Globally Harmonized System (GHS)** – Standar Piktogram Global internasional untuk pelabelan simbol bahaya zat kimia aktif.
         """)
 
-    with col_a2:
+with col_a2:
         # Judul "Tentang Pengembang" tanpa rata tengah (otomatis ke kiri)
         st.markdown("### 👥 Tentang Pengembang")
     
@@ -488,7 +488,7 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         # Catatan kaki penutup tugas proyek rata kiri
         st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
     
-    with sub_col2:
+with sub_col2:
         # Menampilkan detail informasi pengembang dengan format teks biasa
         st.markdown("<p style='text-align: center; font-size: 16px; margin-bottom: 5px;'><b>Kelompok 4</b></p>", unsafe_allow_html=True)
         st.markdown("<p style='text-align: center; color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Lingkungan</p>", unsafe_allow_html=True)
