@@ -478,8 +478,8 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         st.subheader("💻 Atribut Dashboard")
         st.markdown(f"""
             <div style="background-color: #1e293b; color: #f8fafc; padding: 20px; border-radius: 12px;">
-                <p style="margin-bottom: 8px; font-size: 14px;">🛠️ <b>Aplikasi:</b> Storify Waste Pro</p>
-                <p style="margin-bottom: 8px; font-size: 14px;">🚀 <b>Pengembang:</b> kelompok 4 (CSV Database Sync)</p>
+                <p style="margin-bottom: 8px; font-size: 14px;">🛠️ <b>Aplikasi:</b> Storify Waste </p>
+                <p style="margin-bottom: 8px; font-size: 14px;">🚀 <b>Pengembang:</b> kelompok 4 </p>
                 <p style="margin-bottom: 8px; font-size: 14px;">📂 <b>File DB Lokal:</b> {NAMA_FILE_DB}</p>
                 <p style="margin-bottom: 8px; font-size: 14px;">🐍 <b>Mesin:</b> Streamlit - Python 3</p>
                 <hr style="border-color: #475569; margin: 12px 0;">
