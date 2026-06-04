@@ -474,19 +474,19 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         * 🌐 **Globally Harmonized System (GHS)** – Standar Piktogram Global internasional untuk pelabelan simbol bahaya zat kimia aktif.
         """)
 
-    with col_a2:
-        # Judul "Tentang Pengembang" tanpa rata tengah (otomatis ke kiri)
-        st.markdown("### 👥 Tentang Pengembang")
-    
-        # Menampilkan detail informasi pengembang rata kiri
-        st.markdown("**Kelompok 4**")
-        st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Luncuran (Teknik Lingkungan)</p>", unsafe_allow_html=True)
-    
-        # Garis pembatas tipis
-        st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
-    
-        # Catatan kaki penutup tugas proyek rata kiri
-        st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
+   # HAPUS ATAU KELUARKAN DARI "with col_a2:"
+   # Cukup tulis langsung di baris paling kiri seperti di bawah ini:
+
+   st.markdown("### 👥 Tentang Pengembang")
+
+   st.markdown("**Kelompok 4**")
+   st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Lingkungan</p>", unsafe_allow_html=True)
+
+   # Garis pembatas tipis
+   st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
+
+   # Catatan kaki penutup tugas proyek
+   st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
     
     with sub_col2:
         # Menampilkan detail informasi pengembang dengan format teks biasa
