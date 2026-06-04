@@ -465,7 +465,6 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
             
     st.markdown("---")
     col_a1, col_a2 = st.columns([2, 1])
-    
         st.markdown("<br>", unsafe_allow_html=True)
         st.subheader("📚 Dasar Hukum & Standar Teknis")
         st.markdown("""
