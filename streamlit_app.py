@@ -475,14 +475,22 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         """)
 
     with col_a2:
-        st.markdown("<h3 style='text-align: center;'>💻 Atribut Dashboard</h3>", unsafe_allow_html=True)
-        st.markdown(f"""
-            <div style="background-color: #1e293b; color: #f8fafc; padding: 20px; border-radius: 12px; text-align: center;">
-                <p style="margin-bottom: 8px; font-size: 14px;">🛠️ <b>Aplikasi:</b> Storify Waste</p>
-                <p style="margin-bottom: 8px; font-size: 14px;">🚀 <b>Pengembang:</b> Kelompok 4</p>
-                <p style="margin-bottom: 8px; font-size: 14px;">📂 <b>File DB Lokal:</b> {NAMA_FILE_DB}</p>
-                <p style="margin-bottom: 8px; font-size: 14px;">🐍 <b>Mesin:</b> Streamlit - Python 3</p>
-                <hr style="border-color: #475569; margin: 12px 0;">
-                <small style="color: #94a3b8; display: block; text-align: center;">Dikembangkan untuk pemenuhan tugas proyek LPK.</small>
-            </div>
-        """, unsafe_allow_html=True)
+    # Membuat judul "Tentang Pengembang" rata tengah
+    st.markdown("<h3 style='text-align: center;'>👥 Tentang Pengembang</h3>", unsafe_allow_html=True)
+    
+    # Membuat spasi vertikal kecil agar rapi
+    st.markdown("<br>", unsafe_allow_html=True)
+    
+    # Menggunakan sub-kolom agar posisi kontennya bisa presisi di tengah kolom col_a2
+    sub_col1, sub_col2, sub_col3 = st.columns([1, 4, 1])
+    
+    with sub_col2:
+        # Menampilkan detail informasi pengembang dengan format teks biasa
+        st.markdown("<p style='text-align: center; font-size: 16px; margin-bottom: 5px;'><b>Kelompok 4</b></p>", unsafe_allow_html=True)
+        st.markdown("<p style='text-align: center; color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Lingkungan</p>", unsafe_allow_html=True)
+        
+        # Garis pembatas tipis yang elegan
+        st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
+        
+        # Catatan kaki penutup tugas proyek
+        st.markdown("<p style='text-align: center; font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
