@@ -60,7 +60,7 @@ lottie_safety = load_lottieurl("https://lottie.host/bc796e94-3cb1-447a-b5e1-db34
 B3_DATABASE = {
     "Sludge IPAL / Elektroplating": {
         "karakteristik": "Beracun (Toxic)",
-        "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/GHS-hazardous_to_human_health.svg/120px-GHS-hazardous_to_human_health.svg.png",
+        "logo_url": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/9/29/7ff5bec4-cf0a-426d-9059-a8d6ce31f491.png",
         "masa_simpan": 90,
         "wadah_rekomendasi": "Drum Plastik (HDPE Drum) atau Jumbo Bag dengan pelapis dalam (inner liner) untuk mencegah kebocoran material basah.",
         "sop_kebocoran": [
@@ -77,7 +77,7 @@ B3_DATABASE = {
     },
     "Oli Bekas / Solvent": {
         "karakteristik": "Mudah Menyala (Flammable)",
-        "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/GHS-flammable.svg/120px-GHS-flammable.svg.png",
+        "logo_url": "https://i1.wp.com/hsepedia.com/wp-content/uploads/2018/03/sign-2.png?ssl=1",
         "masa_simpan": 180,
         "wadah_rekomendasi": "Drum Baja (Steel Drum) yang dilengkapi dengan seal penutup rapat untuk menahan tekanan uap cair.",
         "sop_kebocoran": [
@@ -94,7 +94,7 @@ B3_DATABASE = {
     },
     "Aki Bekas / Asam-Asaman": {
         "karakteristik": "Korosif (Corrosive)",
-        "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/GHS-corrosive.svg/120px-GHS-corrosive.svg.png",
+        "logo_url": "https://images.tokopedia.net/img/cache/700/VqbcmM/2022/9/29/d0df9bbf-a230-4ee6-9625-360467df8362.png",
         "masa_simpan": 365,
         "wadah_rekomendasi": "Box Container Plastic / Palet Plastik HDPE khusus yang tahan terhadap korosi asam dan zat kimia tajam.",
         "sop_kebocoran": [
@@ -110,7 +110,7 @@ B3_DATABASE = {
     },
     "Kain Majun Terkontaminasi": {
         "karakteristik": "Bahaya Terhadap Kesehatan",
-        "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/GHS-exclamation.svg/120px-GHS-exclamation.svg.png",
+        "logo_url": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/9/29/d3a77198-9c4d-488a-83a1-80fb1cd17f32.png",
         "masa_simpan": 180,
         "wadah_rekomendasi": "Drum Baja (Steel Drum) atau Container Tertutup untuk meminimalisir risiko penyebaran kontaminan ke udara.",
         "sop_kebocoran": [
@@ -125,7 +125,7 @@ B3_DATABASE = {
     },
     "Fly Ash / Bottom Ash": {
         "karakteristik": "Beracun (Toxic)",
-        "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/GHS-hazardous_to_human_health.svg/120px-GHS-hazardous_to_human_health.svg.png",
+        "logo_url": "https://images.tokopedia.net/img/cache/500-square/VqbcmM/2022/9/29/7ff5bec4-cf0a-426d-9059-a8d6ce31f491.png",
         "masa_simpan": 365,
         "wadah_rekomendasi": "Jumbo Bag tipe tertutup rapat (Woven PP dengan liner) untuk menghindari emisi debu halus ke lingkungan sekitar.",
         "sop_kebocoran": [
@@ -466,34 +466,6 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
     st.markdown("---")
     col_a1, col_a2 = st.columns([2, 1])
     
-    with col_a1:
-        st.subheader("👥 Tim Pengembang Sistem")
-        col_m1, col_m2, col_m3 = st.columns(3)
-        with col_m1:
-            st.markdown("""
-            <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; border-left: 4px solid #10b981; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
-                <span style="font-size: 12px; color: #10b981; font-weight: 700; letter-spacing: 1px;">SISTEM DESAIN</span>
-                <h5 style="color: #1e293b; margin: 5px 0 2px 0;">Anggota 1</h5>
-                <p style="color: #64748b; font-size: 14px; margin: 0;">NIM. 123456789</p>
-            </div>
-            """, unsafe_allow_html=True)
-        with col_m2:
-            st.markdown("""
-            <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; border-left: 4px solid #3b82f6; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
-                <span style="font-size: 12px; color: #3b82f6; font-weight: 700; letter-spacing: 1px;">PROGRAMMER</span>
-                <h5 style="color: #1e293b; margin: 5px 0 2px 0;">Anggota 2</h5>
-                <p style="color: #64748b; font-size: 14px; margin: 0;">NIM. 987654321</p>
-            </div>
-            """, unsafe_allow_html=True)
-        with col_m3:
-            st.markdown("""
-            <div style="background-color: #ffffff; padding: 20px; border-radius: 8px; border-left: 4px solid #f59e0b; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
-                <span style="font-size: 12px; color: #f59e0b; font-weight: 700; letter-spacing: 1px;">ANALISIS REGULASI</span>
-                <h5 style="color: #1e293b; margin: 5px 0 2px 0;">Anggota 3</h5>
-                <p style="color: #64748b; font-size: 14px; margin: 0;">NIM. 564738291</p>
-            </div>
-            """, unsafe_allow_html=True)
-            
         st.markdown("<br>", unsafe_allow_html=True)
         st.subheader("📚 Dasar Hukum & Standar Teknis")
         st.markdown("""
