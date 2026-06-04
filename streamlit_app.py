@@ -475,14 +475,14 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         """)
 
     with col_a2:
-        st.subheader("💻 Atribut Dashboard")
-        st.markdown(f"""
-            <div style="background-color: #1e293b; color: #f8fafc; padding: 20px; border-radius: 12px;">
-                <p style="margin-bottom: 8px; font-size: 14px;">🛠️ <b>Aplikasi:</b> Storify Waste </p>
-                <p style="margin-bottom: 8px; font-size: 14px;">🚀 <b>Pengembang:</b> kelompok 4 </p>
-                <p style="margin-bottom: 8px; font-size: 14px;">📂 <b>File DB Lokal:</b> {NAMA_FILE_DB}</p>
-                <p style="margin-bottom: 8px; font-size: 14px;">🐍 <b>Mesin:</b> Streamlit - Python 3</p>
-                <hr style="border-color: #475569; margin: 5px 0;">
-                <small style="color: #94a3b8; display: block; text-align: center;">Dikembangkan untuk pemenuhan tugas proyek LPK.</small>
-            </div>
-        """, unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center;'>💻 Atribut Dashboard</h3>", unsafe_allow_html=True)
+    st.markdown(f"""
+        <div style="background-color: #1e293b; color: #f8fafc; padding: 20px; border-radius: 12px; text-align: center;">
+            <p style="margin-bottom: 8px; font-size: 14px;">🛠️ <b>Aplikasi:</b> Storify Waste</p>
+            <p style="margin-bottom: 8px; font-size: 14px;">🚀 <b>Pengembang:</b> Kelompok 4</p>
+            <p style="margin-bottom: 8px; font-size: 14px;">📂 <b>File DB Lokal:</b> {NAMA_FILE_DB}</p>
+            <p style="margin-bottom: 8px; font-size: 14px;">🐍 <b>Mesin:</b> Streamlit - Python 3</p>
+            <hr style="border-color: #475569; margin: 12px 0;">
+            <small style="color: #94a3b8; display: block; text-align: center;">Dikembangkan untuk pemenuhan tugas proyek LPK.</small>
+        </div>
+    """, unsafe_allow_html=True)
