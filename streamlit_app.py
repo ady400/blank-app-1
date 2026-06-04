@@ -466,8 +466,8 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
     st.markdown("---")
     col_a1, col_a2 = st.columns([2, 1])
     st.markdown("<br>", unsafe_allow_html=True)
-        st.subheader("📚 Dasar Hukum & Standar Teknis")
-        st.markdown("""
+    st.subheader("📚 Dasar Hukum & Standar Teknis")
+    st.markdown("""
         Penentuan piktogram bahaya, batas masa simpan, serta baku penyimpanan dalam aplikasi ini disesuaikan sepenuhnya dengan:
         * 📜 **Peraturan Pemerintah (PP) No. 22 Tahun 2021** – Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup (Khusus Lampiran IX terkait pengelolaan limbah B3).
         * 📜 **Peraturan Menteri LHK No. 6 Tahun 2021** – Tata Cara dan Persyaratan Pengelolaan Limbah Bahan Berbahaya dan Beracun.
@@ -479,7 +479,7 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         st.markdown(f"""
             <div style="background-color: #1e293b; color: #f8fafc; padding: 20px; border-radius: 12px;">
                 <p style="margin-bottom: 8px; font-size: 14px;">🛠️ <b>Aplikasi:</b> Storify Waste Pro</p>
-                <p style="margin-bottom: 8px; font-size: 14px;">🚀 <b>Versi Core:</b> 1.5 (CSV Database Sync)</p>
+                <p style="margin-bottom: 8px; font-size: 14px;">🚀 <b>Pengembang:</b> kelompok 4 (CSV Database Sync)</p>
                 <p style="margin-bottom: 8px; font-size: 14px;">📂 <b>File DB Lokal:</b> {NAMA_FILE_DB}</p>
                 <p style="margin-bottom: 8px; font-size: 14px;">🐍 <b>Mesin:</b> Streamlit - Python 3</p>
                 <hr style="border-color: #475569; margin: 12px 0;">
