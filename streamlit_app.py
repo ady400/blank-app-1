@@ -2,17 +2,17 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime, date
 import requests
-import os  # Ditambahkan untuk manajemen file database lokal
+import os  # Ditambahkan untuk manajemen penyimpanan file lokal
 from streamlit_lottie import st_lottie
 
 # 1. PENGATURAN HALAMAN
 st.set_page_config(
-    page_title="Storify Waste Pro",
+    page_title="Storify Waste",
     page_icon="☣️",
     layout="wide"
 )
 
-# Custom CSS Global untuk mempercantik UI
+# Custom CSS Global untuk mempercantik UI & komponen internal
 st.markdown("""
     <style>
     .stApp {
@@ -41,28 +41,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# 2. KONFIGURASI DATABASE CSV LOKAL
-NAMA_FILE_DB = "database_tps_b3.csv"
-KOLOM_DATABASE = [
-    "ID Limbah", "Jenis Limbah", "Karakteristik / Simbol", 
-    "Rekomendasi Wadah", "Berat (Kg)", "Tanggal Masuk", "Batas Hari", "Sisa Hari", "Status"
-]
-
-# Inisialisasi file CSV jika belum pernah dibuat di folder laptop
-if os.path.exists(NAMA_FILE_DB):
-    # Memuat data lama yang tersimpan permanen
-    try:
-        st.session_state.b3_db = pd.read_csv(NAMA_FILE_DB)
-        # Memastikan format tanggal terbaca dengan benar dari file text CSV
-        if not st.session_state.b3_db.empty:
-            st.session_state.b3_db["Tanggal Masuk"] = pd.to_datetime(st.session_state.b3_db["Tanggal Masuk"]).dt.date
-    except:
-        st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
-else:
-    st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
-    st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
-
-# 3. FUNGSI MEMUAT ANIMASI LOTTIE
+# 2. FUNGSI MEMUAT ANIMASI LOTTIE
 def load_lottieurl(url: str):
     try:
         r = requests.get(url, timeout=5)
@@ -77,7 +56,7 @@ lottie_form = load_lottieurl("https://lottie.host/409d6f6a-ce07-4286-9a25-9b2476
 lottie_about = load_lottieurl("https://lottie.host/51e3db3d-ef04-45fb-bc76-efdbb0cae5eb/tqNUnVjY02.json") 
 lottie_safety = load_lottieurl("https://lottie.host/bc796e94-3cb1-447a-b5e1-db3496c81bf4/cM6wWbyf3T.json")
 
-# 4. DATA SPESIFIKASI LIMBAH (LOGO ASLI & SOP LENGKAP)
+# 3. DATABASE DENGAN LOGO B3 RESMI (WIKIMEDIA) & DATA PENANGANAN LENGKAP
 B3_DATABASE = {
     "Sludge IPAL / Elektroplating": {
         "karakteristik": "Beracun (Toxic)",
@@ -142,7 +121,7 @@ B3_DATABASE = {
         "first_aid": [
             "<b>Paparan Bau Terhirup:</b> Jika petugas pusing akibat menghirup uap kain majun solvent, bawa segera ke ruangan terbuka ber-AC atau berudara bersih."
         ],
-        "apd": ["Sarung Tangan Kain berlapis Nitrile", "Masker Karbon Aktif (penyaring bau gas)", "Kacamata Safety Standar"]
+        "apd": ["Sarung Tangan Kain berlapis Nitrile", "Masker Karbon Aktif (penyaring bah gas)", "Kacamata Safety Standar"]
     },
     "Fly Ash / Bottom Ash": {
         "karakteristik": "Beracun (Toxic)",
@@ -160,6 +139,22 @@ B3_DATABASE = {
         "apd": ["Masker Respirator Partikulat N95/N100", "Kacamata Goggle anti-debu", "Sarung Tangan Heavy Duty", "Safety Boots & Wearpack Full"]
     }
 }
+
+# 4. INITIALIZATION DATABASE PERMANEN (CSV SYNC)
+NAMA_FILE_DB = "database_tps_b3.csv"
+KOLOM_DATABASE = ["ID Limbah", "Jenis Limbah", "Karakteristik / Simbol", "Rekomendasi Wadah", "Berat (Kg)", "Tanggal Masuk", "Batas Hari", "Sisa Hari", "Status"]
+
+if os.path.exists(NAMA_FILE_DB):
+    try:
+        st.session_state.b3_db = pd.read_csv(NAMA_FILE_DB)
+        # Konversi format text tanggal dari CSV kembali menjadi objek date Python agar tidak error
+        if not st.session_state.b3_db.empty:
+            st.session_state.b3_db["Tanggal Masuk"] = pd.to_datetime(st.session_state.b3_db["Tanggal Masuk"]).dt.date
+    except:
+        st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
+else:
+    st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
+    st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
 
 # ==================== SIDEBAR (NAVIGASI SAMPING) ====================
 with st.sidebar:
@@ -190,7 +185,7 @@ if menu_pilihan == "🏠 Beranda Utama":
                 </h1>
                 <p style="color: #475569; font-size: 18px; line-height: 1.6;">
                     Solusi cerdas integratif untuk pencatatan logbook, standarisasi pengemasan, 
-                    pelacakan masa simpan real-time secara permanen, serta penanggulangan tanggap darurat di TPS.
+                    pelacakan masa simpan real-time, serta penanggulangan tanggap darurat di TPS.
                 </p>
             </div>
         """, unsafe_allow_html=True)
@@ -223,21 +218,21 @@ if menu_pilihan == "🏠 Beranda Utama":
     with pilar3:
         st.markdown("""
             <div style="background-color: #ffffff; padding: 25px; border-radius: 12px; border-top: 5px solid #10b981; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); height: 250px;">
-                <h4 style="color: #0f172a; margin-top: 0;">💾 Penyimpanan Aman Terintegrasi</h4>
+                <h4 style="color: #0f172a; margin-top: 0;">📊 Transparansi Audit</h4>
                 <p style="color: #475569; font-size: 14px; line-height: 1.5;">
-                    Dilengkapi dengan sinkronisasi database lokal (.CSV). Seluruh log masuk akan selalu terjaga tanpa takut kehilangan riwayat data saat aplikasi ditutup.
+                    Menghasikan format logbook digital yang terstruktur, rapi, dan siap diekspor kapan saja untuk mempermudah audit lingkungan internal maupun KLHK.
                 </p>
             </div>
         """, unsafe_allow_html=True)
 
-# 📥 MENU 2: INPUT & HASIL DATA (DATABASE PERMANEN AKTIF)
+# 📥 MENU 2: INPUT & HASIL DATA
 elif menu_pilihan == "📥 Input & Hasil Data":
     col_title, col_anim = st.columns([3, 1])
     with col_title:
         st.markdown("""
             <div style="padding-top: 15px;">
                 <h1 style="color: #0f172a; margin-bottom: 0;">📥 Manajemen Logbook & Inventaris TPS</h1>
-                <p style="color: #64748b;">Silakan masukkan data manifes limbah masuk. Data otomatis disimpan permanen pada mesin lokal.</p>
+                <p style="color: #64748b;">Silakan masukkan data manifes limbah masuk di panel kiri. Data otomatis aman tersimpan secara lokal.</p>
             </div>
         """, unsafe_allow_html=True)
     with col_anim:
@@ -260,7 +255,7 @@ elif menu_pilihan == "📥 Input & Hasil Data":
             logo_img = B3_DATABASE[jenis_limbah]["logo_url"]
             wadah_oto = B3_DATABASE[jenis_limbah]["wadah_rekomendasi"]
             
-            # Tampilan Logo B3 Asli Interaktif pada Formulir
+            # KARTU INFO INPUT + LOGO B3 RESMI (Sama Persis dengan Halaman SOP)
             st.markdown(f"""
                 <div style="background-color: #ffffff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
                     <img src="{logo_img}" width="65" style="object-fit: contain;" alt="Logo B3">
@@ -277,7 +272,7 @@ elif menu_pilihan == "📥 Input & Hasil Data":
             
             berat = st.number_input("Berat Limbah Masuk (Kg)", min_value=1.0, step=10.0)
             tgl_masuk = st.date_input("Tanggal Masuk TPS", date.today())
-            submit_btn = st.form_submit_button(label="Simpan Permanen ke Database 💾", use_container_width=True)
+            submit_btn = st.form_submit_button(label="Simpan Data Masuk 💾", use_container_width=True)
             
         if submit_btn:
             id_limbah = f"B3-{datetime.now().strftime('%M%S')}"
@@ -302,15 +297,14 @@ elif menu_pilihan == "📥 Input & Hasil Data":
                 "Status": status
             }])
             
-            # Gabungkan data dan simpan permanen ke CSV
+            # Menggabungkan data lalu menyimpannya permanen ke file CSV
             st.session_state.b3_db = pd.concat([st.session_state.b3_db, new_data], ignore_index=True)
             st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
             
-            st.success("Sukses! Data telah tersimpan aman di berkas lokal.")
+            st.success("Sukses! Data telah tercatat dan tersimpan permanen di folder lokal.")
             st.rerun()
 
     with col_f2:
-        # Menghitung Metrik Ringkasan Real-time
         total_tonase = st.session_state.b3_db["Berat (Kg)"].sum() if not st.session_state.b3_db.empty else 0.0
         jml_kritis = len(st.session_state.b3_db[st.session_state.b3_db['Status'] == "KRITIS 🔴"]) if not st.session_state.b3_db.empty else 0
         jml_warning = len(st.session_state.b3_db[st.session_state.b3_db['Status'] == "Peringatan 🟡"]) if not st.session_state.b3_db.empty else 0
@@ -343,7 +337,7 @@ elif menu_pilihan == "📥 Input & Hasil Data":
         if st.session_state.b3_db.empty:
             st.markdown("""
                 <div style="border: 2px dashed #cbd5e1; padding: 40px; text-align: center; border-radius: 12px; background-color: #f8fafc; margin-top: 10px;">
-                    <p style="color: #94a3b8; font-size: 16px; margin: 0;">Logbook kosong. Masukkan data di panel kiri untuk mulai merekam.</p>
+                    <p style="color: #94a3b8; font-size: 16px; margin: 0;">Logbook kosong. Silakan input manifes baru untuk memantau waktu tampung.</p>
                 </div>
             """, unsafe_allow_html=True)
         else:
@@ -375,18 +369,18 @@ elif menu_pilihan == "📥 Input & Hasil Data":
             with ut2:
                 if st.button("Kosongkan Logbook 🗑️", use_container_width=True):
                     st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
-                    # Menghapus/mengosongkan data di berkas fisik CSV lokal
+                    # Mengosongkan data di berkas fisik CSV lokal
                     st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
                     st.rerun()
 
-# 📋 MENU 3: PROSEDUR KEDARURATAN & SOP (TERISI PENUH OTOMATIS)
+# 📋 MENU 3: PROSEDUR KEDARURATAN & SOP
 elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
     col_s1, col_s2 = st.columns([3, 1])
     with col_s1:
         st.markdown("""
             <div style="padding-top: 15px;">
                 <h1 style="color: #0f172a; margin-bottom: 0;">📋 Panduan K3 & Penanganan Teknis Limbah B3</h1>
-                <p style="color: #64748b;">Standar Operasional Prosedur (SOP) kebocoran, APD wajib, dan pertolongan pertama medis.</p>
+                <p style="color: #64748b;">Standar Operasional Prosedur (SOP) tanggap darurat kebocoran, APD wajib, dan pertolongan pertama.</p>
             </div>
         """, unsafe_allow_html=True)
     with col_s2:
@@ -398,24 +392,28 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
     st.markdown("### 🔍 Pilih Jenis Limbah untuk Melihat Prosedur Spesifik:")
     limbah_terpilih = st.selectbox("Tampilkan Prosedur Penanganan:", list(B3_DATABASE.keys()))
     
+    # Ambil data spesifik dari pilihan dropdown
     data_opsi = B3_DATABASE[limbah_terpilih]
+    
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # Blok Tampilan Kartu Informasi Utama + Ikon GHS Asli Google
+    # BLOK INFORMASI UTAMA & LOGO RESMI
     st.markdown(f"""
         <div style="background-color: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
             <img src="{data_opsi['logo_url']}" width="90" alt="Logo Resmi">
             <div>
                 <span style="font-size: 14px; color: #64748b; font-weight: 500;">Klasifikasi Bahaya GHS Resmi:</span>
                 <h3 style="color: #ef4444; margin: 4px 0 0 0; font-weight: 800;">{data_opsi['karakteristik']}</h3>
-                <p style="color: #475569; margin: 5px 0 0 0; font-size: 15px;"><b>Objek Data:</b> {limbah_terpilled}</p>
+                <p style="color: #475569; margin: 5px 0 0 0; font-size: 15px;"><b>Objek Data:</b> {limbah_terpilih}</p>
             </div>
         </div>
     """, unsafe_allow_html=True)
     
+    # GRID KONTEN PENANGANAN
     c1, c2 = st.columns([2, 1])
     
     with c1:
+        # Loop SOP Kebocoran
         sop_html = "".join([f"<li>{item}</li>" for item in data_opsi["sop_kebocoran"]])
         st.markdown(f"""
             <div style="background-color: #fffbeb; border-left: 6px solid #d97706; padding: 25px; border-radius: 8px; margin-bottom: 20px;">
@@ -426,6 +424,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
             </div>
         """, unsafe_allow_html=True)
         
+        # Loop Pertolongan Pertama
         fa_html = "".join([f"<li>{item}</li>" for item in data_opsi["first_aid"]])
         st.markdown(f"""
             <div style="background-color: #fee2e2; border-left: 6px solid #dc2626; padding: 25px; border-radius: 8px;">
@@ -437,6 +436,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
         """, unsafe_allow_html=True)
         
     with c2:
+        # Loop APD Wajib
         apd_html = "".join([f"<li style='margin-bottom:8px;'>{item}</li>" for item in data_opsi["apd"]])
         st.markdown(f"""
             <div style="background-color: #1e293b; color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
@@ -445,7 +445,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
                     {apd_html}
                 </ul>
                 <hr style="border-color: #475569; margin: 15px 0;">
-                <small style="color: #94a3b8; display:block; text-align:center;">SOP di atas disesuaikan dengan lembar acuan MSDS manufaktur.</small>
+                <small style="color: #94a3b8; display:block; text-align:center;">SOP ini mengacu pada lembar data keselamatan bahan (MSDS).</small>
             </div>
         """, unsafe_allow_html=True)
 
@@ -456,7 +456,7 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         st.markdown("""
             <div style="padding-top: 15px;">
                 <h1 style="color: #0f172a; margin-bottom: 0;">📚 Informasi Pengembang & Regulasi Acuan</h1>
-                <p style="color: #64748b;">Komitmen kepatuhan tata kelola lingkungan industri Indonesia.</p>
+                <p style="color: #64748b;">Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.</p>
             </div>
         """, unsafe_allow_html=True)
     with col_abt2:
@@ -498,7 +498,7 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         st.subheader("📚 Dasar Hukum & Standar Teknis")
         st.markdown("""
         Penentuan piktogram bahaya, batas masa simpan, serta baku penyimpanan dalam aplikasi ini disesuaikan sepenuhnya dengan:
-        * 📜 **Peraturan Pemerintah (PP) No. 22 Tahun 2021** – Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup.
+        * 📜 **Peraturan Pemerintah (PP) No. 22 Tahun 2021** – Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup (Khusus Lampiran IX terkait pengelolaan limbah B3).
         * 📜 **Peraturan Menteri LHK No. 6 Tahun 2021** – Tata Cara dan Persyaratan Pengelolaan Limbah Bahan Berbahaya dan Beracun.
         * 🌐 **Globally Harmonized System (GHS)** – Standar Piktogram Global internasional untuk pelabelan simbol bahaya zat kimia aktif.
         """)
