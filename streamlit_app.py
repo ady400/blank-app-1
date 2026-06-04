@@ -483,6 +483,6 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
                 <p style="margin-bottom: 8px; font-size: 14px;">📂 <b>File DB Lokal:</b> {NAMA_FILE_DB}</p>
                 <p style="margin-bottom: 8px; font-size: 14px;">🐍 <b>Mesin:</b> Streamlit - Python 3</p>
                 <hr style="border-color: #475569; margin: 12px 0;">
-                <small style="color: #94a3b8; display: block; text-align: center;">Dikembangkan untuk pemenuhan tugas proyek digitalisasi TPS industri.</small>
+                <small style="color: #94a3b8; display: block; text-align: center;">Dikembangkan untuk pemenuhan tugas proyek LPK.</small>
             </div>
         """, unsafe_allow_html=True)
