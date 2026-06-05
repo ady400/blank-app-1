@@ -431,7 +431,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
                 <ul style="padding-left:20px; color: #cbd5e1; line-height:1.6; font-size: 15px;">
                     {apd_html}
                 </ul>
-                <hr style="border-color: #475569; margin: 15px 0;">
+                <hr style="border-color: #475569; margin: 25px 0;">
                 <small style="color: #94a3b8; display:block; text-align:center;">SOP ini mengacu pada lembar data keselamatan bahan (MSDS).</small>
             </div>
         """, unsafe_allow_html=True)
