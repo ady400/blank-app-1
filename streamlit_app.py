@@ -56,7 +56,7 @@ lottie_form = load_lottieurl("https://lottie.host/409d6f6a-ce07-4286-9a25-9b2476
 lottie_about = load_lottieurl("https://lottie.host/51e3db3d-ef04-45fb-bc76-efdbb0cae5eb/tqNUnVjY02.json") 
 lottie_safety = load_lottieurl("https://lottie.host/bc796e94-3cb1-447a-b5e1-db3496c81bf4/cM6wWbyf3T.json")
 
-# 3. DATABASE DENGAN LOGO B3 RESMI (WIKIMEDIA) & DATA PENANGANAN LENGKAP
+# 3. DATABASE DENGAN LOGO B3 RESMI & DATA PENANGANAN LENGKAP
 B3_DATABASE = {
     "Sludge IPAL / Elektroplating": {
         "karakteristik": "Beracun (Toxic)",
@@ -121,7 +121,7 @@ B3_DATABASE = {
         "first_aid": [
             "<b>Paparan Bau Terhirup:</b> Jika petugas pusing akibat menghirup uap kain majun solvent, bawa segera ke ruangan terbuka ber-AC atau berudara bersih."
         ],
-        "apd": ["Sarung Tangan Kain berlapis Nitrile", "Masker Karbon Aktif (penyaring bah gas)", "Kacamata Safety Standar"]
+        "apd": ["Sarung Tangan Kain berlapis Nitrile", "Masker Karbon Aktif (penyaring bau gas)", "Kacamata Safety Standar"]
     },
     "Fly Ash / Bottom Ash": {
         "karakteristik": "Beracun (Toxic)",
@@ -131,7 +131,7 @@ B3_DATABASE = {
         "sop_kebocoran": [
             "<b>Metode Pembasahan:</b> Semprotkan spray air halus (*water mist*) ke area ceceran abu halus agar debu tidak terbang terbawa angin.",
             "<b>Pembersihan Serbuk:</b> Sekop abu secara perlahan ke dalam Jumbo Bag baru atau wadah tertutup rapat.",
-            "<b>Pecegahan Saluran:</b> Tutup lubang selokan sekitar agar serbuk abu tidak hanyut masuk ke ekosistem air warga."
+            "<b>Pencegahan Saluran:</b> Tutup lubang selokan sekitar agar serbuk abu tidak hanyut masuk ke ekosistem air warga."
         ],
         "first_aid": [
             "<b>Mata Kemasukan Abu:</b> Basuh mata dengan cairan steril pembersih mata secara berulang. Jangan digosok karena partikel silika abu bisa menggores kornea."
@@ -175,11 +175,19 @@ with st.sidebar:
 
 # 📑 MENU 1: BERANDA UTAMA
 if menu_pilihan == "🏠 Beranda Utama":
+    # FOTO LANDSKAP MENU 1 (Menggunakan foto industri/TPS B3 yang relevan)
+    st.markdown("""
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Beranda">
+        </div>
+    """, unsafe_allow_html=True)
+
     col_header1, col_header2 = st.columns([2, 1])
     with col_header1:
+        # JUDUL DIUBAH KE TENGAH (text-align: center)
         st.markdown("""
-            <div style="padding: 20px 0;">
-                <h1 style="color: #059669; font-size: 38px; font-weight: 800; margin-bottom: 10px;">
+            <div style="padding: 10px 0; text-align: center;">
+                <h1 style="color: #059669; font-size: 38px; font-weight: 800; margin-bottom: 15px;">
                     Sistem Pemantauan & Kepatuhan <span style="color: #059669;">Limbah B3</span>
                 </h1>
                 <p style="color: #475569; font-size: 18px; line-height: 1.6;">
@@ -190,7 +198,7 @@ if menu_pilihan == "🏠 Beranda Utama":
         """, unsafe_allow_html=True)
     with col_header2:
         if lottie_home:
-            st_lottie(lottie_home, speed=1, quality="high", height=220, key="home_lottie")
+            st_lottie(lottie_home, speed=1, quality="high", height=180, key="home_lottie")
             
     st.markdown("---")
     st.markdown("<h3 style='text-align: center; color: #1e293b; margin-bottom: 25px;'>Mengapa Storify Waste Diperlukan?</h3>", unsafe_allow_html=True)
@@ -226,17 +234,25 @@ if menu_pilihan == "🏠 Beranda Utama":
 
 # 📥 MENU 2: INPUT & HASIL DATA
 elif menu_pilihan == "📥 Input & Hasil Data":
+    # FOTO LANDSKAP MENU 2 (Tema gudang penyimpanan/manajemen logbook digital)
+    st.markdown("""
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Input Data">
+        </div>
+    """, unsafe_allow_html=True)
+
     col_title, col_anim = st.columns([3, 1])
     with col_title:
+        # JUDUL DIUBAH KE TENGAH (text-align: center)
         st.markdown("""
-            <div style="padding-top: 15px;">
-                <h1 style="color: #14532d; margin-bottom: 0;">📥 Manajemen Logbook & Inventaris TPS</h1>
+            <div style="padding-top: 10px; text-align: center;">
+                <h1 style="color: #14532d; margin-bottom: 10px;">📥 Manajemen Logbook & Inventaris TPS</h1>
                 <p style="color: #64748b;">Silakan masukkan data manifes limbah masuk di panel kiri. Data otomatis aman tersimpan secara lokal.</p>
             </div>
         """, unsafe_allow_html=True)
     with col_anim:
         if lottie_form:
-            st_lottie(lottie_form, speed=1, quality="high", height=100, key="form_menu_top")
+            st_lottie(lottie_form, speed=1, quality="high", height=90, key="form_menu_top")
             
     st.markdown("---")
     col_f1, col_f2 = st.columns([1.1, 2.1])
@@ -371,17 +387,25 @@ elif menu_pilihan == "📥 Input & Hasil Data":
 
 # 📋 MENU 3: PROSEDUR KEDARURATAN & SOP
 elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
+    # FOTO LANDSKAP MENU 3 (Tema tim K3 / Safety laboratorium industri)
+    st.markdown("""
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Prosedur K3">
+        </div>
+    """, unsafe_allow_html=True)
+
     col_s1, col_s2 = st.columns([3, 1])
     with col_s1:
+        # JUDUL DIUBAH KE TENGAH (text-align: center)
         st.markdown("""
-            <div style="padding-top: 15px;">
-                <h1 style="color: #00f5a0; margin-bottom: 0;">Panduan K3 & Penanganan Teknis Limbah B3</h1>
+            <div style="padding-top: 10px; text-align: center;">
+                <h1 style="color: #059669; margin-bottom: 10px;">Panduan K3 & Penanganan Teknis Limbah B3</h1>
                 <p style="color: #64748b;">Standar Operasional Prosedur (SOP) tanggap darurat kebocoran, APD wajib, dan pertolongan pertama.</p>
             </div>
         """, unsafe_allow_html=True)
     with col_s2:
         if lottie_safety:
-            st_lottie(lottie_safety, speed=1, quality="high", height=100, key="safety_lottie")
+            st_lottie(lottie_safety, speed=1, quality="high", height=90, key="safety_lottie")
             
     st.markdown("---")
     st.markdown("### Pilih Jenis Limbah untuk Melihat Prosedur Spesifik:")
@@ -414,7 +438,6 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
         """, unsafe_allow_html=True)
         
         fa_html = "".join([f"<li>{item}</li>" for item in data_opsi["first_aid"]])
-        # DI SINI PERUBAHANNYA: Menambahkan margin-bottom agar tidak mepet saat di layar HP/mobile
         st.markdown(f"""
             <div style="background-color: #fee2e2; border-left: 6px solid #dc2626; padding: 25px; border-radius: 8px; margin-bottom: 25px;">
                 <h4 style="margin-top:0; color: #991b1b; font-size: 18px;">🚑 Pertolongan Pertama Korban Paparan (First Aid)</h4>
@@ -425,33 +448,40 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
         """, unsafe_allow_html=True)
         
     with c2:
-        # Ditambahkan juga sedikit pembatas opsional khusus layar mobile jika diperlukan, 
-        # namun margin-bottom di atas sudah cukup untuk memberikan ruang bernapas.
+        # PEMBARUAN DI SINI: Kotak APD diganti Latar Putih + Judul Hijau Emerald yang Indah + Jarak Margin Responsif
         apd_html = "".join([f"<li style='margin-bottom:8px;'>{item}</li>" for item in data_opsi["apd"]])
         st.markdown(f"""
-            <div style="background-color: #1e293b; color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
-                <h4 style="color: #10b981; margin-top:0; border-bottom: 1px solid #475569; padding-bottom: 10px; font-size: 18px;">🦺 APD Wajib Petugas</h4>
-                <ul style="padding-left:20px; color: #cbd5e1; line-height:1.6; font-size: 15px;">
+            <div style="background-color: #ffffff; color: #334155; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                <h4 style="color: #059669; margin-top:0; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; font-size: 18px;">🦺 APD Wajib Petugas</h4>
+                <ul style="padding-left:20px; color: #475569; line-height:1.6; font-size: 15px;">
                     {apd_html}
                 </ul>
-                <hr style="border-color: #475569; margin: 15px 0;">
+                <hr style="border-color: #e2e8f0; margin: 15px 0;">
                 <small style="color: #94a3b8; display:block; text-align:center;">SOP ini mengacu pada lembar data keselamatan bahan (MSDS).</small>
             </div>
         """, unsafe_allow_html=True)
 
 # ℹ️ MENU 4: TENTANG & REGULASI
 elif menu_pilihan == "ℹ️ Tentang & Regulasi":
+    # FOTO LANDSKAP MENU 4 (Tema buku hukum/arsip regulasi/kantor lingkungan hidup resmi)
+    st.markdown("""
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Regulasi">
+        </div>
+    """, unsafe_allow_html=True)
+
     col_abt1, col_abt2 = st.columns([3, 1])
     with col_abt1:
+        # JUDUL DIUBAH KE TENGAH (text-align: center)
         st.markdown("""
-            <div style="padding-top: 15px;">
-                <h1 style="color: #4ade80; margin-bottom: 0;">Informasi Pengembang & Regulasi Acuan</h1>
+            <div style="padding-top: 10px; text-align: center;">
+                <h1 style="color: #4ade80; margin-bottom: 10px;">Informasi Pengembang & Regulasi Acuan</h1>
                 <p style="color: #64748b;">Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.</p>
             </div>
         """, unsafe_allow_html=True)
     with col_abt2:
         if lottie_about:
-            st_lottie(lottie_about, speed=1, quality="high", height=100, key="about_menu_top")
+            st_lottie(lottie_about, speed=1, quality="high", height=90, key="about_menu_top")
                 
     st.markdown("---")
     
