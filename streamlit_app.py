@@ -181,22 +181,24 @@ if menu_pilihan == "🏠 Beranda Utama":
         </div>
     """, unsafe_allow_html=True)
 
-    col_header1, col_header2 = st.columns([2, 1])
-    with col_header1:
-        st.markdown("""
-            <div style="padding: 10px 0; text-align: center;">
-                <h1 style="color: #059669; font-size: 38px; font-weight: 800; margin-bottom: 15px;">
-                    Sistem Pemantauan & Kepatuhan <span style="color: #059669;">Limbah B3</span>
-                </h1>
-                <p style="color: #475569; font-size: 18px; line-height: 1.6; text-align: center;">
-                    Solusi cerdas integratif untuk pencatatan logbook, standarisasi pengemasan, 
-                    pelacakan masa simpan real-time, serta penanggulangan tanggap darurat di TPS.
-                </p>
-            </div>
-        """, unsafe_allow_html=True)
-    with col_header2:
-        if lottie_home:
-            st_lottie(lottie_home, speed=1, quality="high", height=180, key="home_lottie")
+    # Memperbaiki posisi agar judul, deskripsi, dan animasi Lottie seimbang di tengah
+    st.markdown("""
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 10px 0;">
+            <h1 style="color: #059669; font-size: 38px; font-weight: 800; margin-bottom: 15px; line-height: 1.3;">
+                Sistem Pemantauan & Kepatuhan <br><span style="color: #059669;">Limbah B3</span>
+            </h1>
+            <p style="color: #475569; font-size: 18px; line-height: 1.6; margin-bottom: 20px;">
+                Solusi cerdas integratif untuk pencatatan logbook, standarisasi pengemasan, <br>
+                pelacakan masa simpan real-time, serta penanggulangan tanggap darurat di TPS.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    # Menampilkan animasi Lottie tepat di bawah teks secara terpusat (Centered)
+    if lottie_home:
+        col_lottie_center1, col_lottie_center2, col_lottie_center3 = st.columns([1, 1, 1])
+        with col_lottie_center2:
+            st_lottie(lottie_home, speed=1, quality="high", height=150, key="home_lottie")
             
     st.markdown("---")
     st.markdown("<h3 style='text-align: center; color: #1e293b; margin-bottom: 25px;'>Mengapa Storify Waste Diperlukan?</h3>", unsafe_allow_html=True)
