@@ -412,7 +412,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
     # GRID KONTEN PENANGANAN
     c1, c2 = st.columns([2, 1])
     
-    with c1:
+with c1:
         # Loop SOP Kebocoran
         sop_html = "".join([f"<li>{item}</li>" for item in data_opsi["sop_kebocoran"]])
         st.markdown(f"""
@@ -435,7 +435,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
             </div>
         """, unsafe_allow_html=True)
         
-    with c2:
+with c2:
         # Loop APD Wajib
         apd_html = "".join([f"<li style='margin-bottom:8px;'>{item}</li>" for item in data_opsi["apd"]])
         st.markdown(f"""
