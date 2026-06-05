@@ -157,6 +157,15 @@ else:
 
 # ==================== SIDEBAR (NAVIGASI SAMPING) ====================
 with st.sidebar:
+    # Menambahkan Foto/Logo di bagian atas Sidebar (Bisa diganti URL fotonya sesuai kebutuhan)
+    st.markdown("""
+        <div style="text-align: center; margin-top: -10px; margin-bottom: 15px;">
+            <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=300&auto=format&fit=crop" 
+                 style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 3px solid #10b981; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" 
+                 alt="Logo Sidebar">
+        </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown("<h2 style='text-align: center; margin-bottom: 0;'>☣️ Storify Waste</h2>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: #4ade80; font-size: 14px;'>Sistem Kepatuhan TPS Digital</p>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
@@ -181,7 +190,6 @@ if menu_pilihan == "🏠 Beranda Utama":
         </div>
     """, unsafe_allow_html=True)
 
-    # Memperbaiki posisi agar judul, deskripsi, dan animasi Lottie seimbang di tengah
     st.markdown("""
         <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 10px 0;">
             <h1 style="color: #059669; font-size: 38px; font-weight: 800; margin-bottom: 15px; line-height: 1.3;">
@@ -194,10 +202,9 @@ if menu_pilihan == "🏠 Beranda Utama":
         </div>
     """, unsafe_allow_html=True)
     
-    # Menampilkan animasi Lottie tepat di bawah teks secara terpusat (Centered)
     if lottie_home:
-        col_lottie_center1, col_lottie_center2, col_lottie_center3 = st.columns([1, 1, 1])
-        with col_lottie_center2:
+        col_l1, col_l2, col_l3 = st.columns([1, 1, 1])
+        with col_l2:
             st_lottie(lottie_home, speed=1, quality="high", height=150, key="home_lottie")
             
     st.markdown("---")
@@ -240,16 +247,20 @@ elif menu_pilihan == "📥 Input & Hasil Data":
         </div>
     """, unsafe_allow_html=True)
 
-    col_title, col_anim = st.columns([3, 1])
-    with col_title:
-        st.markdown("""
-            <div style="padding-top: 10px; text-align: center;">
-                <h1 style="color: #14532d; margin-bottom: 10px; text-align: center;">📥 Manajemen Logbook & Inventaris TPS</h1>
-                <p style="color: #64748b; text-align: center;">Silakan masukkan data manifes limbah masuk di panel kiri. Data otomatis aman tersimpan secara lokal.</p>
-            </div>
-        """, unsafe_allow_html=True)
-    with col_anim:
-        if lottie_form:
+    st.markdown("""
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 10px 0;">
+            <h1 style="color: #14532d; font-size: 34px; font-weight: 800; margin-bottom: 12px;">
+                📥 Manajemen Logbook & Inventaris TPS
+            </h1>
+            <p style="color: #64748b; font-size: 16px; line-height: 1.5; margin-bottom: 15px;">
+                Silakan masukkan data manifes limbah masuk di panel kiri. Data otomatis aman tersimpan secara lokal.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    if lottie_form:
+        col_lf1, col_lf2, col_lf3 = st.columns([1, 1, 1])
+        with col_lf2:
             st_lottie(lottie_form, speed=1, quality="high", height=90, key="form_menu_top")
             
     st.markdown("---")
@@ -390,23 +401,27 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
         </div>
     """, unsafe_allow_html=True)
 
-    col_s1, col_s2 = st.columns([3, 1])
-    with col_s1:
-        st.markdown("""
-            <div style="padding-top: 10px; text-align: center;">
-                <h1 style="color: #059669; margin-bottom: 10px; text-align: center;">Panduan K3 & Penanganan Teknis Limbah B3</h1>
-                <p style="color: #64748b; text-align: center;">Standar Operasional Prosedur (SOP) tanggap darurat kebocoran, APD wajib, dan pertolongan pertama.</p>
-            </div>
-        """, unsafe_allow_html=True)
-    with col_s2:
-        if lottie_safety:
+    st.markdown("""
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 10px 0;">
+            <h1 style="color: #059669; font-size: 34px; font-weight: 800; margin-bottom: 12px;">
+                Panduan K3 & Penanganan Teknis Limbah B3
+            </h1>
+            <p style="color: #64748b; font-size: 16px; line-height: 1.5; margin-bottom: 15px;">
+                Standar Operasional Prosedur (SOP) tanggap darurat kebocoran, APD wajib, and pertolongan pertama.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    if lottie_safety:
+        col_ls1, col_ls2, col_ls3 = st.columns([1, 1, 1])
+        with col_ls2:
             st_lottie(lottie_safety, speed=1, quality="high", height=90, key="safety_lottie")
             
     st.markdown("---")
     st.markdown("### Pilih Jenis Limbah untuk Melihat Prosedur Spesifik:")
-    limbah_terpilih = st.selectbox("Tampilkan Prosedur Penanganan:", list(B3_DATABASE.keys()))
+    limbah_terpilled = st.selectbox("Tampilkan Prosedur Penanganan:", list(B3_DATABASE.keys()))
     
-    data_opsi = B3_DATABASE[limbah_terpilih]
+    data_opsi = B3_DATABASE[limbah_terpilled]
     st.markdown("<br>", unsafe_allow_html=True)
     
     st.markdown(f"""
@@ -415,7 +430,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
             <div>
                 <span style="font-size: 14px; color: #64748b; font-weight: 500;">Klasifikasi Bahaya GHS Resmi:</span>
                 <h3 style="color: #ef4444; margin: 4px 0 0 0; font-weight: 800;">{data_opsi['karakteristik']}</h3>
-                <p style="color: #475569; margin: 5px 0 0 0; font-size: 15px;"><b>Objek Data:</b> {limbah_terpilih}</p>
+                <p style="color: #475569; margin: 5px 0 0 0; font-size: 15px;"><b>Objek Data:</b> {limbah_terpilled}</p>
             </div>
         </div>
     """, unsafe_allow_html=True)
@@ -463,16 +478,20 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         </div>
     """, unsafe_allow_html=True)
 
-    col_abt1, col_abt2 = st.columns([3, 1])
-    with col_abt1:
-        st.markdown("""
-            <div style="padding-top: 10px; text-align: center;">
-                <h1 style="color: #4ade80; margin-bottom: 10px; text-align: center;">Informasi Pengembang & Regulasi Acuan</h1>
-                <p style="color: #64748b; text-align: center;">Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.</p>
-            </div>
-        """, unsafe_allow_html=True)
-    with col_abt2:
-        if lottie_about:
+    st.markdown("""
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 10px 0;">
+            <h1 style="color: #4ade80; font-size: 34px; font-weight: 800; margin-bottom: 12px;">
+                Informasi Pengembang & Regulasi Acuan
+            </h1>
+            <p style="color: #64748b; font-size: 16px; line-height: 1.5; margin-bottom: 15px;">
+                Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    if lottie_about:
+        col_la1, col_la2, col_la3 = st.columns([1, 1, 1])
+        with col_la2:
             st_lottie(lottie_about, speed=1, quality="high", height=90, key="about_menu_top")
                 
     st.markdown("---")
