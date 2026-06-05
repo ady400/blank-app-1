@@ -414,8 +414,9 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
         """, unsafe_allow_html=True)
         
         fa_html = "".join([f"<li>{item}</li>" for item in data_opsi["first_aid"]])
+        # DI SINI PERUBAHANNYA: Menambahkan margin-bottom agar tidak mepet saat di layar HP/mobile
         st.markdown(f"""
-            <div style="background-color: #fee2e2; border-left: 6px solid #dc2626; padding: 25px; border-radius: 15px;">
+            <div style="background-color: #fee2e2; border-left: 6px solid #dc2626; padding: 25px; border-radius: 8px; margin-bottom: 25px;">
                 <h4 style="margin-top:0; color: #991b1b; font-size: 18px;">🚑 Pertolongan Pertama Korban Paparan (First Aid)</h4>
                 <ul style="margin-bottom:0; padding-left:20px; line-height:1.7; color: #7f1d1d;">
                     {fa_html}
@@ -424,14 +425,16 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
         """, unsafe_allow_html=True)
         
     with c2:
+        # Ditambahkan juga sedikit pembatas opsional khusus layar mobile jika diperlukan, 
+        # namun margin-bottom di atas sudah cukup untuk memberikan ruang bernapas.
         apd_html = "".join([f"<li style='margin-bottom:8px;'>{item}</li>" for item in data_opsi["apd"]])
         st.markdown(f"""
-            <div style="background-color: #1e293b; color: white; padding: 15px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+            <div style="background-color: #1e293b; color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
                 <h4 style="color: #10b981; margin-top:0; border-bottom: 1px solid #475569; padding-bottom: 10px; font-size: 18px;">🦺 APD Wajib Petugas</h4>
                 <ul style="padding-left:20px; color: #cbd5e1; line-height:1.6; font-size: 15px;">
                     {apd_html}
                 </ul>
-                <hr style="border-color: #475569; margin: 25px 0;">
+                <hr style="border-color: #475569; margin: 15px 0;">
                 <small style="color: #94a3b8; display:block; text-align:center;">SOP ini mengacu pada lembar data keselamatan bahan (MSDS).</small>
             </div>
         """, unsafe_allow_html=True)
