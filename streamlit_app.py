@@ -71,7 +71,7 @@ B3_DATABASE = {
         ],
         "first_aid": [
             "<b>Kontak Kulit:</b> Segera basuh kulit menggunakan sabun antiseptik dan air mengalir deras.",
-            "<b>Kontak Mata:</b> Alirkan air bersih dari eye wash station minimal 15 menit dan segera hubungi tim medis."
+            "<b>Kontak Mata:</b> Alirkan air bersih dari eye wash station minimal 15 menit and segera hubungi tim medis."
         ],
         "apd": ["Masker Katrid Gas / N95", "Kacamata Goggle pelindung", "Sarung Tangan Nitrile / Rubber tebal", "Sepatu Safety Boots karet"]
     },
@@ -131,7 +131,7 @@ B3_DATABASE = {
         "sop_kebocoran": [
             "<b>Metode Pembasahan:</b> Semprotkan spray air halus (*water mist*) ke area ceceran abu halus agar debu tidak terbang terbawa angin.",
             "<b>Pembersihan Serbuk:</b> Sekop abu secara perlahan ke dalam Jumbo Bag baru atau wadah tertutup rapat.",
-            "<b>Pencegahan Saluran:</b> Tutup lubang selokan sekitar agar serbuk abu tidak hanyut masuk ke ekosistem air warga."
+            "<b>Pecegahan Saluran:</b> Tutup lubang selokan sekitar agar serbuk abu tidak hanyut masuk ke ekosistem air warga."
         ],
         "first_aid": [
             "<b>Mata Kemasukan Abu:</b> Basuh mata dengan cairan steril pembersih mata secara berulang. Jangan digosok karena partikel silika abu bisa menggores kornea."
@@ -147,7 +147,6 @@ KOLOM_DATABASE = ["ID Limbah", "Jenis Limbah", "Karakteristik / Simbol", "Rekome
 if os.path.exists(NAMA_FILE_DB):
     try:
         st.session_state.b3_db = pd.read_csv(NAMA_FILE_DB)
-        # Konversi format text tanggal dari CSV kembali menjadi objek date Python agar tidak error
         if not st.session_state.b3_db.empty:
             st.session_state.b3_db["Tanggal Masuk"] = pd.to_datetime(st.session_state.b3_db["Tanggal Masuk"]).dt.date
     except:
@@ -220,7 +219,7 @@ if menu_pilihan == "🏠 Beranda Utama":
             <div style="background-color: #ffffff; padding: 25px; border-radius: 12px; border-top: 5px solid #10b981; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); height: 250px;">
                 <h4 style="color: #0f172a; margin-top: 0;">📊 Transparansi Audit</h4>
                 <p style="color: #475569; font-size: 14px; line-height: 1.5;">
-                    Menghasikan format logbook digital yang terstruktur, rapi, dan siap diekspor kapan saja untuk mempermudah audit lingkungan internal maupun KLHK.
+                    Menghasilkan format logbook digital yang terstruktur, rapi, dan siap diekspor kapan saja untuk mempermudah audit lingkungan internal maupun KLHK.
                 </p>
             </div>
         """, unsafe_allow_html=True)
@@ -255,7 +254,6 @@ elif menu_pilihan == "📥 Input & Hasil Data":
             logo_img = B3_DATABASE[jenis_limbah]["logo_url"]
             wadah_oto = B3_DATABASE[jenis_limbah]["wadah_rekomendasi"]
             
-            # KARTU INFO INPUT + LOGO B3 RESMI (Sama Persis dengan Halaman SOP)
             st.markdown(f"""
                 <div style="background-color: #ffffff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; gap: 15px;">
                     <img src="{logo_img}" width="65" style="object-fit: contain;" alt="Logo B3">
@@ -297,7 +295,6 @@ elif menu_pilihan == "📥 Input & Hasil Data":
                 "Status": status
             }])
             
-            # Menggabungkan data lalu menyimpannya permanen ke file CSV
             st.session_state.b3_db = pd.concat([st.session_state.b3_db, new_data], ignore_index=True)
             st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
             
@@ -369,7 +366,6 @@ elif menu_pilihan == "📥 Input & Hasil Data":
             with ut2:
                 if st.button("Kosongkan Logbook 🗑️", use_container_width=True):
                     st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
-                    # Mengosongkan data di berkas fisik CSV lokal
                     st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
                     st.rerun()
 
@@ -388,16 +384,12 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
             st_lottie(lottie_safety, speed=1, quality="high", height=100, key="safety_lottie")
             
     st.markdown("---")
-    
     st.markdown("### 🔍 Pilih Jenis Limbah untuk Melihat Prosedur Spesifik:")
     limbah_terpilih = st.selectbox("Tampilkan Prosedur Penanganan:", list(B3_DATABASE.keys()))
     
-    # Ambil data spesifik dari pilihan dropdown
     data_opsi = B3_DATABASE[limbah_terpilih]
-    
     st.markdown("<br>", unsafe_allow_html=True)
     
-    # BLOK INFORMASI UTAMA & LOGO RESMI
     st.markdown(f"""
         <div style="background-color: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
             <img src="{data_opsi['logo_url']}" width="90" alt="Logo Resmi">
@@ -409,11 +401,8 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
         </div>
     """, unsafe_allow_html=True)
     
-    # GRID KONTEN PENANGANAN
     c1, c2 = st.columns([2, 1])
-    
-with c1:
-        # Loop SOP Kebocoran
+    with c1:
         sop_html = "".join([f"<li>{item}</li>" for item in data_opsi["sop_kebocoran"]])
         st.markdown(f"""
             <div style="background-color: #fffbeb; border-left: 6px solid #d97706; padding: 25px; border-radius: 8px; margin-bottom: 20px;">
@@ -424,7 +413,6 @@ with c1:
             </div>
         """, unsafe_allow_html=True)
         
-        # Loop Pertolongan Pertama
         fa_html = "".join([f"<li>{item}</li>" for item in data_opsi["first_aid"]])
         st.markdown(f"""
             <div style="background-color: #fee2e2; border-left: 6px solid #dc2626; padding: 25px; border-radius: 8px;">
@@ -435,8 +423,7 @@ with c1:
             </div>
         """, unsafe_allow_html=True)
         
-with c2:
-        # Loop APD Wajib
+    with c2:
         apd_html = "".join([f"<li style='margin-bottom:8px;'>{item}</li>" for item in data_opsi["apd"]])
         st.markdown(f"""
             <div style="background-color: #1e293b; color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
@@ -451,50 +438,34 @@ with c2:
 
 # ℹ️ MENU 4: TENTANG & REGULASI
 elif menu_pilihan == "ℹ️ Tentang & Regulasi":
-     col_abt1, col_abt2 = st.columns([3, 1])
-      with col_abt1:
-            st.markdown("""
-                <div style="padding-top: 15px;">
-                    <h1 style="color: #0f172a; margin-bottom: 0;">📚 Informasi Pengembang & Regulasi Acuan</h1>
-                    <p style="color: #64748b;">Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.</p>
-                </div>
-            """, unsafe_allow_html=True)
-        with col_abt2:
-            if lottie_about:
-                st_lottie(lottie_about, speed=1, quality="high", height=100, key="about_menu_top")
-                
-        st.markdown("---")
-        col_a1, col_a2 = st.columns([2, 1])
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.subheader("📚 Dasar Hukum & Standar Teknis")
+    col_abt1, col_abt2 = st.columns([3, 1])
+    with col_abt1:
         st.markdown("""
-            Penentuan piktogram bahaya, batas masa simpan, serta baku penyimpanan dalam aplikasi ini disesuaikan sepenuhnya dengan:
-            * 📜 **Peraturan Pemerintah (PP) No. 22 Tahun 2021** – Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup (Khusus Lampiran IX terkait pengelolaan limbah B3).
-            * 📜 **Peraturan Menteri LHK No. 6 Tahun 2021** – Tata Cara dan Persyaratan Pengelolaan Limbah Bahan Berbahaya dan Beracun.
-            * 🌐 **Globally Harmonized System (GHS)** – Standar Piktogram Global internasional untuk pelabelan simbol bahaya zat kimia aktif.
-            """)
+            <div style="padding-top: 15px;">
+                <h1 style="color: #0f172a; margin-bottom: 0;">📚 Informasi Pengembang & Regulasi Acuan</h1>
+                <p style="color: #64748b;">Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.</p>
+            </div>
+        """, unsafe_allow_html=True)
+    with col_abt2:
+        if lottie_about:
+            st_lottie(lottie_about, speed=1, quality="high", height=100, key="about_menu_top")
+                
+    st.markdown("---")
     
-    with col_a2:
-            # Judul "Tentang Pengembang" tanpa rata tengah (otomatis ke kiri)
-            st.markdown("### 👥 Tentang Pengembang")
-        
-            # Menampilkan detail informasi pengembang rata kiri
-            st.markdown("**Kelompok 4**")
-            st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Luncuran (Teknik Lingkungan)</p>", unsafe_allow_html=True)
-        
-            # Garis pembatas tipis
-            st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
-        
-            # Catatan kaki penutup tugas proyek rata kiri
-            st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
-        
-    with sub_col2:
-            # Menampilkan detail informasi pengembang dengan format teks biasa
-            st.markdown("<p style='text-align: center; font-size: 16px; margin-bottom: 5px;'><b>Kelompok 4</b></p>", unsafe_allow_html=True)
-            st.markdown("<p style='text-align: center; color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Lingkungan</p>", unsafe_allow_html=True)
-            
-            # Garis pembatas tipis yang elegan
-            st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
-            
-            # Catatan kaki penutup tugas proyek
-            st.markdown("<p style='text-align: center; font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
+    # Penataan Konten Dasar Hukum & Tentang Pengembang Berjajar Rapi ke Bawah Rata Kiri
+    st.markdown("### 📚 Dasar Hukum & Standar Teknis")
+    st.markdown("""
+        Penentuan piktogram bahaya, batas masa simpan, serta baku penyimpanan dalam aplikasi ini disesuaikan sepenuhnya dengan:
+        * 📜 **Peraturan Pemerintah (PP) No. 22 Tahun 2021** – Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup (Khusus Lampiran IX terkait pengelolaan limbah B3).
+        * 📜 **Peraturan Menteri LHK No. 6 Tahun 2021** – Tata Cara dan Persyaratan Pengelolaan Limbah Bahan Berbahaya dan Beracun.
+        * 🌐 **Globally Harmonized System (GHS)** – Standar Piktogram Global internasional untuk pelabelan simbol bahaya zat kimia aktif.
+        """)
+    
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # Bagian Informasi Pengembang (Rata Kiri Sesuai Request)
+    st.markdown("### 👥 Tentang Pengembang")
+    st.markdown("**Kelompok 4**")
+    st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Lingkungan</p>", unsafe_allow_html=True)
+    st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
