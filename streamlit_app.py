@@ -158,7 +158,7 @@ else:
 # ==================== SIDEBAR (NAVIGASI SAMPING) ====================
 with st.sidebar:
     st.markdown("<h2 style='text-align: center; margin-bottom: 0;'>☣️ Storify Waste</h2>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #94a3b8; font-size: 14px;'>Sistem Kepatuhan TPS Digital</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #10b981; font-size: 14px;'>Sistem Kepatuhan TPS Digital</p>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
     
     menu_pilihan = st.radio(
