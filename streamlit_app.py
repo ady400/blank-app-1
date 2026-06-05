@@ -450,9 +450,9 @@ with c2:
         """, unsafe_allow_html=True)
 
 # ℹ️ MENU 4: TENTANG & REGULASI
-    elif menu_pilihan == "ℹ️ Tentang & Regulasi":
-        col_abt1, col_abt2 = st.columns([3, 1])
-        with col_abt1:
+elif menu_pilihan == "ℹ️ Tentang & Regulasi":
+     col_abt1, col_abt2 = st.columns([3, 1])
+      with col_abt1:
             st.markdown("""
                 <div style="padding-top: 15px;">
                     <h1 style="color: #0f172a; margin-bottom: 0;">📚 Informasi Pengembang & Regulasi Acuan</h1>
