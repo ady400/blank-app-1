@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime, date
 import requests
-import os  # Ditambahkan untuk manajemen penyimpanan file lokal
+import os  
 from streamlit_lottie import st_lottie
 
 # 1. PENGATURAN HALAMAN
