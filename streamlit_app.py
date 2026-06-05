@@ -179,8 +179,8 @@ if menu_pilihan == "🏠 Beranda Utama":
     with col_header1:
         st.markdown("""
             <div style="padding: 20px 0;">
-                <h1 style="color: #0f172a; font-size: 38px; font-weight: 800; margin-bottom: 10px;">
-                    Sistem Pemantauan & Kepatuhan <span style="color: #10b981;">Limbah B3</span>
+                <h1 style="color: #059669; font-size: 38px; font-weight: 800; margin-bottom: 10px;">
+                    Sistem Pemantauan & Kepatuhan <span style="color: #059669;">Limbah B3</span>
                 </h1>
                 <p style="color: #475569; font-size: 18px; line-height: 1.6;">
                     Solusi cerdas integratif untuk pencatatan logbook, standarisasi pengemasan, 
@@ -230,7 +230,7 @@ elif menu_pilihan == "📥 Input & Hasil Data":
     with col_title:
         st.markdown("""
             <div style="padding-top: 15px;">
-                <h1 style="color: #0f172a; margin-bottom: 0;">📥 Manajemen Logbook & Inventaris TPS</h1>
+                <h1 style="color: #14532d; margin-bottom: 0;">📥 Manajemen Logbook & Inventaris TPS</h1>
                 <p style="color: #64748b;">Silakan masukkan data manifes limbah masuk di panel kiri. Data otomatis aman tersimpan secara lokal.</p>
             </div>
         """, unsafe_allow_html=True)
@@ -375,7 +375,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
     with col_s1:
         st.markdown("""
             <div style="padding-top: 15px;">
-                <h1 style="color: #0f172a; margin-bottom: 0;">📋 Panduan K3 & Penanganan Teknis Limbah B3</h1>
+                <h1 style="color: #00f5a0; margin-bottom: 0;">Panduan K3 & Penanganan Teknis Limbah B3</h1>
                 <p style="color: #64748b;">Standar Operasional Prosedur (SOP) tanggap darurat kebocoran, APD wajib, dan pertolongan pertama.</p>
             </div>
         """, unsafe_allow_html=True)
@@ -384,7 +384,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
             st_lottie(lottie_safety, speed=1, quality="high", height=100, key="safety_lottie")
             
     st.markdown("---")
-    st.markdown("### 🔍 Pilih Jenis Limbah untuk Melihat Prosedur Spesifik:")
+    st.markdown("### Pilih Jenis Limbah untuk Melihat Prosedur Spesifik:")
     limbah_terpilih = st.selectbox("Tampilkan Prosedur Penanganan:", list(B3_DATABASE.keys()))
     
     data_opsi = B3_DATABASE[limbah_terpilih]
@@ -445,7 +445,7 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
     with col_abt1:
         st.markdown("""
             <div style="padding-top: 15px;">
-                <h1 style="color: #0f172a; margin-bottom: 0;">📚 Informasi Pengembang & Regulasi Acuan</h1>
+                <h1 style="color: #4ade80; margin-bottom: 0;">Informasi Pengembang & Regulasi Acuan</h1>
                 <p style="color: #64748b;">Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.</p>
             </div>
         """, unsafe_allow_html=True)
@@ -469,6 +469,6 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
     # Bagian Informasi Pengembang (Rata Kiri Sesuai Request)
     st.markdown("### 👥 Tentang Pengembang")
     st.markdown("**Kelompok 4**")
-    st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Lingkungan</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Pengolahan Limbah Industri</p>", unsafe_allow_html=True)
     st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
     st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
