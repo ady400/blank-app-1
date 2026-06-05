@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime, date
 import requests
-import os  # Ditambahkan untuk manajemen penyimpanan file lokal
+import os
 from streamlit_lottie import st_lottie
 
 # 1. PENGATURAN HALAMAN
@@ -175,7 +175,6 @@ with st.sidebar:
 
 # 📑 MENU 1: BERANDA UTAMA
 if menu_pilihan == "🏠 Beranda Utama":
-    # FOTO LANDSKAP MENU 1 (Menggunakan foto industri/TPS B3 yang relevan)
     st.markdown("""
         <div style="text-align: center; margin-bottom: 20px;">
             <img src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Beranda">
@@ -184,13 +183,13 @@ if menu_pilihan == "🏠 Beranda Utama":
 
     col_header1, col_header2 = st.columns([2, 1])
     with col_header1:
-        # JUDUL DIUBAH KE TENGAH (text-align: center)
+        # TULISAN DESKRIPSI SEKARANG BERADA DI TENGAH (text-align: center)
         st.markdown("""
             <div style="padding: 10px 0; text-align: center;">
                 <h1 style="color: #059669; font-size: 38px; font-weight: 800; margin-bottom: 15px;">
                     Sistem Pemantauan & Kepatuhan <span style="color: #059669;">Limbah B3</span>
                 </h1>
-                <p style="color: #475569; font-size: 18px; line-height: 1.6;">
+                <p style="color: #475569; font-size: 18px; line-height: 1.6; text-align: center;">
                     Solusi cerdas integratif untuk pencatatan logbook, standarisasi pengemasan, 
                     pelacakan masa simpan real-time, serta penanggulangan tanggap darurat di TPS.
                 </p>
@@ -234,7 +233,6 @@ if menu_pilihan == "🏠 Beranda Utama":
 
 # 📥 MENU 2: INPUT & HASIL DATA
 elif menu_pilihan == "📥 Input & Hasil Data":
-    # FOTO LANDSKAP MENU 2 (Tema gudang penyimpanan/manajemen logbook digital)
     st.markdown("""
         <div style="text-align: center; margin-bottom: 20px;">
             <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Input Data">
@@ -243,11 +241,11 @@ elif menu_pilihan == "📥 Input & Hasil Data":
 
     col_title, col_anim = st.columns([3, 1])
     with col_title:
-        # JUDUL DIUBAH KE TENGAH (text-align: center)
+        # TULISAN DESKRIPSI SEKARANG BERADA DI TENGAH (text-align: center)
         st.markdown("""
             <div style="padding-top: 10px; text-align: center;">
-                <h1 style="color: #14532d; margin-bottom: 10px;">📥 Manajemen Logbook & Inventaris TPS</h1>
-                <p style="color: #64748b;">Silakan masukkan data manifes limbah masuk di panel kiri. Data otomatis aman tersimpan secara lokal.</p>
+                <h1 style="color: #14532d; margin-bottom: 10px; text-align: center;">📥 Manajemen Logbook & Inventaris TPS</h1>
+                <p style="color: #64748b; text-align: center;">Silakan masukkan data manifes limbah masuk di panel kiri. Data otomatis aman tersimpan secara lokal.</p>
             </div>
         """, unsafe_allow_html=True)
     with col_anim:
@@ -314,8 +312,9 @@ elif menu_pilihan == "📥 Input & Hasil Data":
             st.session_state.b3_db = pd.concat([st.session_state.b3_db, new_data], ignore_index=True)
             st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
             
-            st.success("Sukses! Data telah tercatat dan tersimpan permanen di folder lokal.")
-            st.rerun()
+            st.success("Sukses! Data telah tercatat dan tersimpan.")
+            # Solusi Error: Menggunakan native session_state reload alternatif untuk menghindari Bug removeChild JavaScript
+            st.js_code("window.location.reload();")
 
     with col_f2:
         total_tonase = st.session_state.b3_db["Berat (Kg)"].sum() if not st.session_state.b3_db.empty else 0.0
@@ -383,11 +382,10 @@ elif menu_pilihan == "📥 Input & Hasil Data":
                 if st.button("Kosongkan Logbook 🗑️", use_container_width=True):
                     st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
                     st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
-                    st.rerun()
+                    st.js_code("window.location.reload();")
 
 # 📋 MENU 3: PROSEDUR KEDARURATAN & SOP
 elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
-    # FOTO LANDSKAP MENU 3 (Tema tim K3 / Safety laboratorium industri)
     st.markdown("""
         <div style="text-align: center; margin-bottom: 20px;">
             <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Prosedur K3">
@@ -396,11 +394,11 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
 
     col_s1, col_s2 = st.columns([3, 1])
     with col_s1:
-        # JUDUL DIUBAH KE TENGAH (text-align: center)
+        # TULISAN DESKRIPSI SEKARANG BERADA DI TENGAH (text-align: center)
         st.markdown("""
             <div style="padding-top: 10px; text-align: center;">
-                <h1 style="color: #059669; margin-bottom: 10px;">Panduan K3 & Penanganan Teknis Limbah B3</h1>
-                <p style="color: #64748b;">Standar Operasional Prosedur (SOP) tanggap darurat kebocoran, APD wajib, dan pertolongan pertama.</p>
+                <h1 style="color: #059669; margin-bottom: 10px; text-align: center;">Panduan K3 & Penanganan Teknis Limbah B3</h1>
+                <p style="color: #64748b; text-align: center;">Standar Operasional Prosedur (SOP) tanggap darurat kebocoran, APD wajib, dan pertolongan pertama.</p>
             </div>
         """, unsafe_allow_html=True)
     with col_s2:
@@ -411,6 +409,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
     st.markdown("### Pilih Jenis Limbah untuk Melihat Prosedur Spesifik:")
     limbah_terpilih = st.selectbox("Tampilkan Prosedur Penanganan:", list(B3_DATABASE.keys()))
     
+    data_opsi = B3_DATABASE[limbah_terpilled] if limbah_terpilih in B3_DATABASE else B3_DATABASE["Sludge IPAL / Elektroplating"]
     data_opsi = B3_DATABASE[limbah_terpilih]
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -448,7 +447,6 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
         """, unsafe_allow_html=True)
         
     with c2:
-        # PEMBARUAN DI SINI: Kotak APD diganti Latar Putih + Judul Hijau Emerald yang Indah + Jarak Margin Responsif
         apd_html = "".join([f"<li style='margin-bottom:8px;'>{item}</li>" for item in data_opsi["apd"]])
         st.markdown(f"""
             <div style="background-color: #ffffff; color: #334155; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
@@ -463,7 +461,6 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
 
 # ℹ️ MENU 4: TENTANG & REGULASI
 elif menu_pilihan == "ℹ️ Tentang & Regulasi":
-    # FOTO LANDSKAP MENU 4 (Tema buku hukum/arsip regulasi/kantor lingkungan hidup resmi)
     st.markdown("""
         <div style="text-align: center; margin-bottom: 20px;">
             <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Regulasi">
@@ -472,11 +469,11 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
 
     col_abt1, col_abt2 = st.columns([3, 1])
     with col_abt1:
-        # JUDUL DIUBAH KE TENGAH (text-align: center)
+        # TULISAN DESKRIPSI SEKARANG BERADA DI TENGAH (text-align: center)
         st.markdown("""
             <div style="padding-top: 10px; text-align: center;">
-                <h1 style="color: #4ade80; margin-bottom: 10px;">Informasi Pengembang & Regulasi Acuan</h1>
-                <p style="color: #64748b;">Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.</p>
+                <h1 style="color: #4ade80; margin-bottom: 10px; text-align: center;">Informasi Pengembang & Regulasi Acuan</h1>
+                <p style="color: #64748b; text-align: center;">Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.</p>
             </div>
         """, unsafe_allow_html=True)
     with col_abt2:
@@ -485,7 +482,6 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
                 
     st.markdown("---")
     
-    # Penataan Konten Dasar Hukum & Tentang Pengembang Berjajar Rapi ke Bawah Rata Kiri
     st.markdown("### 📚 Dasar Hukum & Standar Teknis")
     st.markdown("""
         Penentuan piktogram bahaya, batas masa simpan, serta baku penyimpanan dalam aplikasi ini disesuaikan sepenuhnya dengan:
@@ -496,7 +492,6 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    # Bagian Informasi Pengembang (Rata Kiri Sesuai Request)
     st.markdown("### 👥 Tentang Pengembang")
     st.markdown("**Kelompok 4**")
     st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Pengolahan Limbah Industri</p>", unsafe_allow_html=True)
