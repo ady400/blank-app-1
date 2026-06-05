@@ -451,50 +451,50 @@ with c2:
 
 # ℹ️ MENU 4: TENTANG & REGULASI
     elif menu_pilihan == "ℹ️ Tentang & Regulasi":
-    col_abt1, col_abt2 = st.columns([3, 1])
-    with col_abt1:
+        col_abt1, col_abt2 = st.columns([3, 1])
+        with col_abt1:
+            st.markdown("""
+                <div style="padding-top: 15px;">
+                    <h1 style="color: #0f172a; margin-bottom: 0;">📚 Informasi Pengembang & Regulasi Acuan</h1>
+                    <p style="color: #64748b;">Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.</p>
+                </div>
+            """, unsafe_allow_html=True)
+        with col_abt2:
+            if lottie_about:
+                st_lottie(lottie_about, speed=1, quality="high", height=100, key="about_menu_top")
+                
+        st.markdown("---")
+        col_a1, col_a2 = st.columns([2, 1])
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.subheader("📚 Dasar Hukum & Standar Teknis")
         st.markdown("""
-            <div style="padding-top: 15px;">
-                <h1 style="color: #0f172a; margin-bottom: 0;">📚 Informasi Pengembang & Regulasi Acuan</h1>
-                <p style="color: #64748b;">Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.</p>
-            </div>
-        """, unsafe_allow_html=True)
-    with col_abt2:
-        if lottie_about:
-            st_lottie(lottie_about, speed=1, quality="high", height=100, key="about_menu_top")
+            Penentuan piktogram bahaya, batas masa simpan, serta baku penyimpanan dalam aplikasi ini disesuaikan sepenuhnya dengan:
+            * 📜 **Peraturan Pemerintah (PP) No. 22 Tahun 2021** – Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup (Khusus Lampiran IX terkait pengelolaan limbah B3).
+            * 📜 **Peraturan Menteri LHK No. 6 Tahun 2021** – Tata Cara dan Persyaratan Pengelolaan Limbah Bahan Berbahaya dan Beracun.
+            * 🌐 **Globally Harmonized System (GHS)** – Standar Piktogram Global internasional untuk pelabelan simbol bahaya zat kimia aktif.
+            """)
+    
+    with col_a2:
+            # Judul "Tentang Pengembang" tanpa rata tengah (otomatis ke kiri)
+            st.markdown("### 👥 Tentang Pengembang")
+        
+            # Menampilkan detail informasi pengembang rata kiri
+            st.markdown("**Kelompok 4**")
+            st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Luncuran (Teknik Lingkungan)</p>", unsafe_allow_html=True)
+        
+            # Garis pembatas tipis
+            st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
+        
+            # Catatan kaki penutup tugas proyek rata kiri
+            st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
+        
+    with sub_col2:
+            # Menampilkan detail informasi pengembang dengan format teks biasa
+            st.markdown("<p style='text-align: center; font-size: 16px; margin-bottom: 5px;'><b>Kelompok 4</b></p>", unsafe_allow_html=True)
+            st.markdown("<p style='text-align: center; color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Lingkungan</p>", unsafe_allow_html=True)
             
-    st.markdown("---")
-    col_a1, col_a2 = st.columns([2, 1])
-    st.markdown("<br>", unsafe_allow_html=True)
-    st.subheader("📚 Dasar Hukum & Standar Teknis")
-    st.markdown("""
-        Penentuan piktogram bahaya, batas masa simpan, serta baku penyimpanan dalam aplikasi ini disesuaikan sepenuhnya dengan:
-        * 📜 **Peraturan Pemerintah (PP) No. 22 Tahun 2021** – Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup (Khusus Lampiran IX terkait pengelolaan limbah B3).
-        * 📜 **Peraturan Menteri LHK No. 6 Tahun 2021** – Tata Cara dan Persyaratan Pengelolaan Limbah Bahan Berbahaya dan Beracun.
-        * 🌐 **Globally Harmonized System (GHS)** – Standar Piktogram Global internasional untuk pelabelan simbol bahaya zat kimia aktif.
-        """)
-
-with col_a2:
-        # Judul "Tentang Pengembang" tanpa rata tengah (otomatis ke kiri)
-        st.markdown("### 👥 Tentang Pengembang")
-    
-        # Menampilkan detail informasi pengembang rata kiri
-        st.markdown("**Kelompok 4**")
-        st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Luncuran (Teknik Lingkungan)</p>", unsafe_allow_html=True)
-    
-        # Garis pembatas tipis
-        st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
-    
-        # Catatan kaki penutup tugas proyek rata kiri
-        st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
-    
-with sub_col2:
-        # Menampilkan detail informasi pengembang dengan format teks biasa
-        st.markdown("<p style='text-align: center; font-size: 16px; margin-bottom: 5px;'><b>Kelompok 4</b></p>", unsafe_allow_html=True)
-        st.markdown("<p style='text-align: center; color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Program Vokasi Kimia Industri / Teknik Lingkungan</p>", unsafe_allow_html=True)
-        
-        # Garis pembatas tipis yang elegan
-        st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
-        
-        # Catatan kaki penutup tugas proyek
-        st.markdown("<p style='text-align: center; font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
+            # Garis pembatas tipis yang elegan
+            st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
+            
+            # Catatan kaki penutup tugas proyek
+            st.markdown("<p style='text-align: center; font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
