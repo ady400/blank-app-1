@@ -351,7 +351,7 @@ elif menu_pilihan == "📥 Input & Hasil Data":
             st.markdown(f"""
                 <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-left: 5px solid #10b981; text-align: center;">
                     <span style="font-size: 13px; color: #64748b; font-weight: 600;">TOTAL BERAT DI TPS</span><br>
-                    <span style="font-size: 24px; font-weight: 700; color: #1e293b;">{total_tonase:,} Kg</span>
+                    <span style="font-size: 24px; font-weight: 700; color: #1e293b;">{int(total_tonase):,} Kg</span>
                 </div>
             """, unsafe_allow_html=True)
         with m_col2:
@@ -390,7 +390,17 @@ elif menu_pilihan == "📥 Input & Hasil Data":
             except AttributeError:
                 df_styled = st.session_state.b3_db.style.applymap(color_status, subset=["Status"])
                 
-            st.dataframe(df_styled, use_container_width=True, hide_index=True)
+            st.dataframe(
+                df_styled, 
+                use_container_width=True, 
+                hide_index=True,
+                column_config={
+                    "Berat (Kg)": st.column_config.NumberColumn(
+                        "Berat (Kg)",
+                        format="%d"  # <-- Menghilangkan semua angka nol di belakang koma
+                    )
+                }
+            )
             st.markdown("<br>", unsafe_allow_html=True)
             
             ut1, ut2 = st.columns([2, 1])
