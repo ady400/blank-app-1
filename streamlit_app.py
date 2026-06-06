@@ -38,6 +38,22 @@ st.markdown("""
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
     }
+    
+    /* TAMBAHKAN KODE BARU INI AGAR FOTO TIDAK ZOOM */
+    .stApp img {
+        max-width: 65% !important; /* Batasi lebar foto agar tidak terlalu besar */
+        height: auto !important;    /* Rasio foto tetap proporsional (tidak gepeng) */
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 15px;       /* Sudut melengkung halus */
+    }
+    /* Khusus untuk logo kecil di dalam sidebar dan form agar tidak ikut mengecil */
+    section[data-testid="stSidebar"] img, div[style*="align-items: center"] img, div[style*="box-shadow"] img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: inline-block;
+    }
     </style>
 """, unsafe_allow_html=True)
 
