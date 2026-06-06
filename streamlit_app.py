@@ -329,7 +329,7 @@ elif menu_pilihan == "📥 Input & Hasil Data":
                 "Jenis Limbah": jenis_limbah,
                 "Karakteristik / Simbol": char_name,
                 "Rekomendasi Wadah": wadah_oto,
-                "Berat (Kg)": berat,
+                "Berat (Kg)": int(berat),  
                 "Tanggal Masuk": tgl_masuk,
                 "Batas Hari": f"{batas_hari} Hari",
                 "Sisa Hari": sisa_hari,
