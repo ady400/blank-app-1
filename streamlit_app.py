@@ -160,13 +160,13 @@ with st.sidebar:
     # Menambahkan Foto/Logo di bagian atas Sidebar (Bisa diganti URL fotonya sesuai kebutuhan)
     st.markdown("""
         <div style="text-align: center; margin-top: -10px; margin-bottom: 15px;">
-            <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=300&auto=format&fit=crop" 
+            <img src="https://i.pinimg.com/1200x/bc/06/49/bc064971cc50c810bab582f3c2a3b3da.jpg" 
                  style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; border: 3px solid #10b981; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" 
                  alt="Logo Sidebar">
         </div>
     """, unsafe_allow_html=True)
     
-    st.markdown("<h2 style='text-align: center; margin-bottom: 0;'>☣️ Storify Waste</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; margin-bottom: 0;'>Storify Waste</h2>", unsafe_allow_html=True)
     st.markdown("<p style='text-align: center; color: #f4faf4; font-size: 14px;'>Sistem Kepatuhan TPS Digital</p>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
     
@@ -243,14 +243,14 @@ if menu_pilihan == "🏠 Beranda Utama":
 elif menu_pilihan == "📥 Input & Hasil Data":
     st.markdown("""
         <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Input Data">
+            <img src="https://i.pinimg.com/736x/32/2d/e3/322de3bd660e7f097e4a3f06f801b564.jpg" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Input Data">
         </div>
     """, unsafe_allow_html=True)
 
     st.markdown("""
         <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 10px 0;">
             <h1 style="color: #14532d; font-size: 34px; font-weight: 800; margin-bottom: 12px;">
-                📥 Manajemen Logbook & Inventaris TPS
+                Manajemen Logbook & Inventaris TPS
             </h1>
             <p style="color: #64748b; font-size: 16px; line-height: 1.5; margin-bottom: 15px;">
                 Silakan masukkan data manifes limbah masuk di panel kiri. Data otomatis aman tersimpan secara lokal.
@@ -397,7 +397,7 @@ elif menu_pilihan == "📥 Input & Hasil Data":
 elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
     st.markdown("""
         <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Prosedur K3">
+            <img src="https://i.pinimg.com/1200x/b0/ac/91/b0ac9167fdb7fa83a26d95e6d4a3cda1.jpg" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Prosedur K3">
         </div>
     """, unsafe_allow_html=True)
 
@@ -474,7 +474,7 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
 elif menu_pilihan == "ℹ️ Tentang & Regulasi":
     st.markdown("""
         <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://images.unsplash.com/photo-1450133064473-71024230f91b?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Regulasi">
+            <img src="https://i.pinimg.com/736x/f5/82/78/f582784694c468fa39d383f98f821b19.jpg" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Regulasi">
         </div>
     """, unsafe_allow_html=True)
 
@@ -484,7 +484,7 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
                 Informasi Pengembang & Regulasi Acuan
             </h1>
             <p style="color: #64748b; font-size: 16px; line-height: 1.5; margin-bottom: 15px;">
-                Komitmen kepatuhan limbah industri berdasarkan landasan hukum positif Indonesia.
+                Kepatuhan limbah industri berdasarkan regulasi hukum yang ada Indonesia.
             </p>
         </div>
     """, unsafe_allow_html=True)
@@ -510,4 +510,4 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
     st.markdown("**Kelompok 4**")
     st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Pengolahan Limbah Industri</p>", unsafe_allow_html=True)
     st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
-    st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Laporan Praktik Kerja (LPK).</p>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Logika dan Pemrograman Komputer (LPK).</p>", unsafe_allow_html=True)
