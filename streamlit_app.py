@@ -186,7 +186,7 @@ with st.sidebar:
 if menu_pilihan == "🏠 Beranda Utama":
     st.markdown("""
         <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://images.unsplash.com/photo-1616401784845-180882ba9ba8?q=80&w=1200&auto=format&fit=crop" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Beranda">
+            <img src="https://i.pinimg.com/736x/8f/13/c1/8f13c1dca7ce0e85ac51c0fba3a92f9a.jpg" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Beranda">
         </div>
     """, unsafe_allow_html=True)
 
