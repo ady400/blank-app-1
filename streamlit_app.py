@@ -22,7 +22,7 @@ st.markdown("""
         background-color: #14532d !important;
     }
     section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span, section[data-testid="stSidebar"] label {
-        color: #334155 !important;
+        color: #ffffff !important;
     }
     div.stButton > button:first-child {
         background-color: #10b981;
