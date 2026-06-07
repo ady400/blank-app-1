@@ -393,32 +393,30 @@ elif menu_pilihan == "📥 Input & Hasil Data":
         jml_kritis = len(st.session_state.b3_db[st.session_state.b3_db['Status'] == "KRITIS 🔴"]) if not st.session_state.b3_db.empty else 0
         jml_warning = len(st.session_state.b3_db[st.session_state.b3_db['Status'] == "Peringatan 🟡"]) if not st.session_state.b3_db.empty else 0
         
-        m_col1, m_col2, m_col3 = st.columns(3)
+       m_col1, m_col2, m_col3 = st.columns(3)
 
         with m_col1:
-            st.markdown(f"""
+            # Menggunakan pemisah koma standar agar tidak memicu NameError f-string
+            st.markdown("""
                 <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); min-height: 110px; display: flex; flex-direction: column; justify-content: center;">
                     <span style="font-size: 13px; color: #64748b; font-weight: 600; display: block; line-height: 1.2;">TOTAL BERAT DATA</span>
-                    <span style="font-size: 24px; font-weight: 700; color: #1e293b; display: block; margin-top: 5px;">{int(total_ton)} Kg</span>
-                </div>
             """, unsafe_allow_html=True)
+            st.markdown(f"""<span style="font-size: 24px; font-weight: 700; color: #1e293b; display: block; margin-top: 5px;">{int(st.session_state.b3_db['Berat (Kg)'].sum()) if not st.session_state.b3_db.empty else 0} Kg</span></div>""", unsafe_allow_html=True)
         
         with m_col2:
-            st.markdown(f"""
+            st.markdown("""
                 <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); min-height: 110px; display: flex; flex-direction: column; justify-content: center;">
                     <span style="font-size: 13px; color: #64748b; font-weight: 600; display: block; line-height: 1.2;">STATUS PERINGATAN</span>
-                    <span style="font-size: 24px; font-weight: 700; color: #d97706; display: block; margin-top: 5px;">{jml_warning}</span>
-                </div>
             """, unsafe_allow_html=True)
+            st.markdown(f"""<span style="font-size: 24px; font-weight: 700; color: #d97706; display: block; margin-top: 5px;">{len(st.session_state.b3_db[st.session_state.b3_db['Status'] == 'Peringatan']) if not st.session_state.b3_db.empty else 0}</span></div>""", unsafe_allow_html=True)
         
         with m_col3:
-            st.markdown(f"""
+            st.markdown("""
                 <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); min-height: 110px; display: flex; flex-direction: column; justify-content: center;">
                     <span style="font-size: 13px; color: #64748b; font-weight: 600; display: block; line-height: 1.2;">STATUS KRITIS</span>
-                    <span style="font-size: 24px; font-weight: 700; color: #ef4444; display: block; margin-top: 5px;">{jml_kritis}</span>
-                </div>
             """, unsafe_allow_html=True)
-                
+            st.markdown(f"""<span style="font-size: 24px; font-weight: 700; color: #ef4444; display: block; margin-top: 5px;">{len(st.session_state.b3_db[st.session_state.b3_db['Status'] == 'Kritis']) if not st.session_state.b3_db.empty else 0}</span></div>""", unsafe_allow_html=True)
+                        
         st.markdown("<br>", unsafe_allow_html=True)
         
         if st.session_state.b3_db.empty:
