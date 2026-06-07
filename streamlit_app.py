@@ -156,24 +156,9 @@ B3_DATABASE = {
     }
 }
 
-# 4. INITIALIZATION DATABASE PERMANEN (CSV SYNC)
-NAMA_FILE_DB = "database_tps_b3.csv"
-KOLOM_DATABASE = ["ID Limbah", "Jenis Limbah", "Karakteristik / Simbol", "Rekomendasi Wadah", "Berat (Kg)", "Tanggal Masuk", "Batas Hari", "Sisa Hari", "Status"]
-
-if os.path.exists(NAMA_FILE_DB):
-    try:
-        st.session_state.b3_db = pd.read_csv(NAMA_FILE_DB)
-        if not st.session_state.b3_db.empty:
-            st.session_state.b3_db["Tanggal Masuk"] = pd.to_datetime(st.session_state.b3_db["Tanggal Masuk"]).dt.date
-    except:
-        st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
-else:
-    st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
-    st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
-
-# ==================== SIDEBAR (NAVIGASI SAMPING) ====================
+# 4. INITIALIZATION DATABASE PERMANEN & SIDEBAR MULTI-USER
 with st.sidebar:
-    # Menambahkan Foto/Logo di bagian atas Sidebar (Bisa diganti URL fotonya sesuai kebutuhan)
+    # Logo bagian atas Sidebar
     st.markdown("""
         <div style="text-align: center; margin-top: -10px; margin-bottom: 15px;">
             <img src="https://i.pinimg.com/1200x/bc/06/49/bc064971cc50c810bab582f3c2a3b3da.jpg" 
@@ -183,9 +168,36 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("<h2 style='text-align: center; margin-bottom: 0;'>Storify Waste</h2>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #f4faf4; font-size: 14px;'>Sistem Kepatuhan TPS Digital</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #334155; font-size: 14px;'>Sistem Kepatuhan TPS Digital</p>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
+
+    # --- FITUR UTAMA: RUANG PENYIMPANAN TERPISAH ---
+    st.markdown("### 🔑 Akses Ruang TPS")
+    # Kolom teks input nama pabrik/user untuk memisahkan file database
+    id_tps_user = st.text_input("Masukkan ID / Nama Perusahaan:", value="Default_TPS").strip().replace(" ", "_")
     
+    # Membuat nama file otomatis unik berdasarkan input user
+    NAMA_FILE_DB = f"database_tps_{id_tps_user}.csv"
+    KOLOM_DATABASE = ["ID Limbah", "Jenis Limbah", "Karakteristik / Simbol", "Rekomendasi Wadah", "Berat (Kg)", "Tanggal Masuk", "Batas Hari", "Sisa Hari", "Status"]
+
+    # Logika pergantian atau pembuatan database otomatis baru
+    if "current_tps_id" not in st.session_state or st.session_state.current_tps_id != id_tps_user:
+        st.session_state.current_tps_id = id_tps_user
+        if os.path.exists(NAMA_FILE_DB):
+            try:
+                st.session_state.b3_db = pd.read_csv(NAMA_FILE_DB)
+                if not st.session_state.b3_db.empty:
+                    st.session_state.b3_db["Tanggal Masuk"] = pd.to_datetime(st.session_state.b3_db["Tanggal Masuk"]).dt.date
+            except:
+                st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
+        else:
+            st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
+            st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
+            
+    st.info(f"📍 Ruang data aktif: **{id_tps_user.replace('_', ' ')}**")
+    st.markdown("---")
+    # -----------------------------------------------
+
     menu_pilihan = st.radio(
         "Pilih Menu Navigasi:",
         ["🏠 Beranda Utama", "📥 Input & Hasil Data", "📋 Prosedur Kedaruratan & SOP", "ℹ️ Tentang & Regulasi"]
@@ -195,7 +207,6 @@ with st.sidebar:
     st.markdown("---")
     st.caption("KELOMPOK 5")
     st.caption("Versi 1.0")
-
 # ==================== LOGIKA HALAMAN UTAMA ====================
 
 # 📑 MENU 1: BERANDA UTAMA
