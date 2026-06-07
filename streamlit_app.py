@@ -156,7 +156,7 @@ B3_DATABASE = {
     }
 }
 
-# 4. INITIALIZATION DATABASE PERMANEN & SIDEBAR MULTI-USER
+# 4. INITIALIZATION DATABASE PERMANEN & SIDEBAR MULTI-USER (UI PREMIUM REVISED)
 with st.sidebar:
     # Logo bagian atas Sidebar
     st.markdown("""
@@ -171,18 +171,33 @@ with st.sidebar:
     st.markdown("<p style='text-align: center; color: #334155; font-size: 14px;'>Sistem Kepatuhan TPS Digital</p>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # --- FITUR UTAMA: RUANG PENYIMPANAN TERPISAH ---
-    st.markdown("### 🔑 Akses Ruang TPS")
-    # Kolom teks input nama pabrik/user untuk memisahkan file database
-    id_tps_user = st.text_input("Masukkan ID / Nama Perusahaan:", value="Default_TPS").strip().replace(" ", "_")
+    # --- FITUR UTAMA: RUANG PENYIMPANAN TERPISAH (VERSI FIX VISUAL) ---
+    # Judul dibuat warna kuning emas menyala agar kontras dan terbaca jelas
+    st.markdown("<h3 style='color: #f59e0b; font-size: 19px; font-weight: 700; margin-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);'>🔑 Akses Ruang TPS</h3>", unsafe_allow_html=True)
     
-    # Membuat nama file otomatis unik berdasarkan input user
-    NAMA_FILE_DB = f"database_tps_{id_tps_user}.csv"
+    # Menghapus default value 'Default_TPS', diganti kosong + placeholder petunjuk
+    id_tps_user = st.text_input(
+        "Masukkan ID / Nama Perusahaan:", 
+        value="", 
+        placeholder="Contoh: PT Surya Abadi",
+        help="Ketik nama pabrik/perusahaan Anda. Sistem akan otomatis membuatkan atau memuat folder database khusus untuk Anda agar tidak bercampur dengan pengguna lain."
+    ).strip()
+    
+    # Pengkondisian cerdas: Jika kolom masih kosong/baru dibuka, arahkan ke Ruang Publik bawaan agar tidak eror
+    if not id_tps_user:
+        nama_file_aktif = "ruang_publik"
+        nama_tampilan = "Ruang Publik (Belum Masuk)"
+    else:
+        nama_file_aktif = id_tps_user.replace(" ", "_")
+        nama_tampilan = id_tps_user.replace("_", " ")
+    
+    # Generate nama file .csv unik berdasarkan input user secara realtime
+    NAMA_FILE_DB = f"database_tps_{nama_file_aktif}.csv"
     KOLOM_DATABASE = ["ID Limbah", "Jenis Limbah", "Karakteristik / Simbol", "Rekomendasi Wadah", "Berat (Kg)", "Tanggal Masuk", "Batas Hari", "Sisa Hari", "Status"]
 
-    # Logika pergantian atau pembuatan database otomatis baru
-    if "current_tps_id" not in st.session_state or st.session_state.current_tps_id != id_tps_user:
-        st.session_state.current_tps_id = id_tps_user
+    # Logika otomatisasi pembuatan berkas database terisolasi
+    if "current_tps_id" not in st.session_state or st.session_state.current_tps_id != nama_file_aktif:
+        st.session_state.current_tps_id = nama_file_aktif
         if os.path.exists(NAMA_FILE_DB):
             try:
                 st.session_state.b3_db = pd.read_csv(NAMA_FILE_DB)
@@ -194,9 +209,22 @@ with st.sidebar:
             st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
             st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
             
-    st.info(f"📍 Ruang data aktif: **{id_tps_user.replace('_', ' ')}**")
+    # CARD SHAPE BARU: Menggunakan gradasi emerald cerah dan border neon tipis agar teks putih di dalamnya menonjol tajam
+    st.markdown(f"""
+        <div style="background: linear-gradient(135deg, #059669 0%, #10b981 100%); 
+                    padding: 14px; 
+                    border-radius: 12px; 
+                    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25); 
+                    text-align: center; 
+                    margin-top: 12px; 
+                    border: 1px solid #34d399;">
+            <span style="font-size: 12px; color: #d1fae5; font-weight: 500; display: block; margin-bottom: 3px; letter-spacing: 0.5px;">📍 RUANG DATA AKTIF</span>
+            <b style="color: #ffffff; font-size: 15px; font-weight: 700; display: block; word-wrap: break-word;">{nama_tampilan}</b>
+        </div>
+    """, unsafe_allow_html=True)
+    
     st.markdown("---")
-    # -----------------------------------------------
+    # -----------------------------------------------------------------
 
     menu_pilihan = st.radio(
         "Pilih Menu Navigasi:",
