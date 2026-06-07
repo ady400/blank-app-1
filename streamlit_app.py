@@ -19,7 +19,7 @@ st.markdown("""
         background-color: #fdfdfd;
     }
     section[data-testid="stSidebar"] {
-        background-color: #f0fdf4 !important;
+        background-color: #14532d !important;
     }
     section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span, section[data-testid="stSidebar"] label {
         color: #334155 !important;
