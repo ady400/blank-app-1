@@ -5,25 +5,41 @@ import requests
 import os
 from streamlit_lottie import st_lottie
 
-# 1. PENGATURAN HALAMAN & CUSTOM CSS GLOBAL (KEMBALI KE HIJAU ASLI)
+# 1. PENGATURAN HALAMAN & CUSTOM CSS GLOBAL (HIJAU TUA DEEP FOREST)
 st.set_page_config(
     page_title="Storify Waste",
     page_icon="☣️",
     layout="wide"
 )
 
-# Custom CSS Global untuk mempercantik UI & komponen internal
+# Custom CSS Global dengan Sidebar Hijau Tua Pekat/Gelap
 st.markdown("""
     <style>
     .stApp {
         background-color: #fdfdfd;
     }
+    
+    /* SIDEBAR HIJAU TUA AGAL GELAP (DEEP FOREST GREEN) */
     section[data-testid="stSidebar"] {
-        background-color: #f0fdf4 !important;
+        background-color: #0f4c3a !important; /* Warna hijau botol tua pekat */
     }
-    section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span, section[data-testid="stSidebar"] label {
-        color: #334155 !important;
+    
+    /* Memastikan teks di sidebar berwarna putih bersih agar kontras dengan background gelap */
+    section[data-testid="stSidebar"] h2, 
+    section[data-testid="stSidebar"] p, 
+    section[data-testid="stSidebar"] span, 
+    section[data-testid="stSidebar"] label {
+        color: #ffffff !important;
     }
+    
+    /* WARNA IKON TANDA TANYA (HELP) BIAR PUTIH TERANG NYALA */
+    section[data-testid="stSidebar"] button[data-testid="stTooltipHoverTarget"] svg {
+        fill: #ffffff !important;
+        color: #ffffff !important;
+        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
+    }
+    
+    /* Desain Tombol Utama (Button) */
     div.stButton > button:first-child {
         background-color: #10b981;
         color: white;
@@ -41,14 +57,14 @@ st.markdown("""
     
     /* AGAR FOTO TIDAK ZOOM */
     .stApp img {
-        max-width: 65% !important; /* Batasi lebar foto agar tidak terlalu besar */
-        height: auto !important;    /* Rasio foto tetap proporsional (tidak gepeng) */
+        max-width: 65% !important;
+        height: auto !important;    
         display: block;
         margin-left: auto;
         margin-right: auto;
-        border-radius: 15px;       /* Sudut melengkung halus */
+        border-radius: 15px;       
     }
-    /* Khusus untuk logo kecil di dalam sidebar dan form agar tidak ikut mengecil */
+    /* Khusus untuk logo kecil di dalam sidebar agar tidak melar */
     section[data-testid="stSidebar"] img, div[style*="align-items: center"] img, div[style*="box-shadow"] img {
         max-width: 100% !important;
         height: auto !important;
