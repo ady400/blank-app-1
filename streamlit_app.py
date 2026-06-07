@@ -5,41 +5,19 @@ import requests
 import os
 from streamlit_lottie import st_lottie
 
-# 1. PENGATURAN HALAMAN & CUSTOM CSS GLOBAL (HIJAU TUA DEEP FOREST)
+# 1. PENGATURAN HALAMAN & CUSTOM CSS GLOBAL (VERSI ASLI)
 st.set_page_config(
     page_title="Storify Waste",
     page_icon="☣️",
     layout="wide"
 )
 
-# Custom CSS Global dengan Sidebar Hijau Tua Pekat/Gelap
+# Custom CSS Global bawaan awal program Anda
 st.markdown("""
     <style>
     .stApp {
         background-color: #fdfdfd;
     }
-    
-    /* SIDEBAR HIJAU TUA AGAL GELAP (DEEP FOREST GREEN) */
-    section[data-testid="stSidebar"] {
-        background-color: #0f4c3a !important; /* Warna hijau botol tua pekat */
-    }
-    
-    /* Memastikan teks di sidebar berwarna putih bersih agar kontras dengan background gelap */
-    section[data-testid="stSidebar"] h2, 
-    section[data-testid="stSidebar"] p, 
-    section[data-testid="stSidebar"] span, 
-    section[data-testid="stSidebar"] label {
-        color: #ffffff !important;
-    }
-    
-    /* WARNA IKON TANDA TANYA (HELP) BIAR PUTIH TERANG NYALA */
-    section[data-testid="stSidebar"] button[data-testid="stTooltipHoverTarget"] svg {
-        fill: #ffffff !important;
-        color: #ffffff !important;
-        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
-    }
-    
-    /* Desain Tombol Utama (Button) */
     div.stButton > button:first-child {
         background-color: #10b981;
         color: white;
@@ -53,22 +31,6 @@ st.markdown("""
         background-color: #059669;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-    }
-    
-    /* AGAR FOTO TIDAK ZOOM */
-    .stApp img {
-        max-width: 65% !important;
-        height: auto !important;    
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 15px;       
-    }
-    /* Khusus untuk logo kecil di dalam sidebar agar tidak melar */
-    section[data-testid="stSidebar"] img, div[style*="align-items: center"] img, div[style*="box-shadow"] img {
-        max-width: 100% !important;
-        height: auto !important;
-        display: inline-block;
     }
     </style>
 """, unsafe_allow_html=True)
