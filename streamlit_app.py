@@ -393,7 +393,7 @@ elif menu_pilihan == "📥 Input & Hasil Data":
         jml_kritis = len(st.session_state.b3_db[st.session_state.b3_db['Status'] == "KRITIS 🔴"]) if not st.session_state.b3_db.empty else 0
         jml_warning = len(st.session_state.b3_db[st.session_state.b3_db['Status'] == "Peringatan 🟡"]) if not st.session_state.b3_db.empty else 0
         
-       m_col1, m_col2, m_col3 = st.columns(3)
+        m_col1, m_col2, m_col3 = st.columns(3)
 
         with m_col1:
             # Menggunakan pemisah koma standar agar tidak memicu NameError f-string
