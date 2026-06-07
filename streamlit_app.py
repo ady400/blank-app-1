@@ -5,7 +5,7 @@ import requests
 import os
 from streamlit_lottie import st_lottie
 
-# 1. PENGATURAN HALAMAN & CUSTOM CSS GLOBAL (TEMA PREMIUM GRADIENT)
+# 1. PENGATURAN HALAMAN & CUSTOM CSS GLOBAL (KEMBALI KE HIJAU ASLI)
 st.set_page_config(
     page_title="Storify Waste",
     page_icon="☣️",
@@ -39,14 +39,14 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
     }
     
-    /* TAMBAHKAN KODE BARU INI AGAR FOTO TIDAK ZOOM */
+    /* AGAR FOTO TIDAK ZOOM */
     .stApp img {
-        max-width: 65% !important;
-        height: auto !important;    
+        max-width: 65% !important; /* Batasi lebar foto agar tidak terlalu besar */
+        height: auto !important;    /* Rasio foto tetap proporsional (tidak gepeng) */
         display: block;
         margin-left: auto;
         margin-right: auto;
-        border-radius: 15px;       
+        border-radius: 15px;       /* Sudut melengkung halus */
     }
     /* Khusus untuk logo kecil di dalam sidebar dan form agar tidak ikut mengecil */
     section[data-testid="stSidebar"] img, div[style*="align-items: center"] img, div[style*="box-shadow"] img {
