@@ -5,25 +5,32 @@ import requests
 import os
 from streamlit_lottie import st_lottie
 
-# 1. PENGATURAN HALAMAN
+# 1. PENGATURAN HALAMAN & CUSTOM CSS GLOBAL (VERSI FIX IKON TANDA TANYA)
 st.set_page_config(
     page_title="Storify Waste",
     page_icon="☣️",
     layout="wide"
 )
 
-# Custom CSS Global untuk mempercantik UI & komponen internal
 st.markdown("""
     <style>
     .stApp {
         background-color: #fdfdfd;
     }
     section[data-testid="stSidebar"] {
-        background-color: #14532d !important;
+        background-color: #115e59 !important; /* Hijau teal gelap elegan */
     }
     section[data-testid="stSidebar"] h2, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span, section[data-testid="stSidebar"] label {
-        color: #ffffff !important;
+        color: #ffffff !important; /* Semua teks sidebar jadi putih bersih */
     }
+    
+    /* FIX IKON TANDA TANYA (HELP) BIAR PUTIH NYALA NEON */
+    section[data-testid="stSidebar"] button[data-testid="stTooltipHoverTarget"] svg {
+        fill: #ffffff !important;
+        color: #ffffff !important;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+    }
+    
     div.stButton > button:first-child {
         background-color: #10b981;
         color: white;
@@ -39,16 +46,16 @@ st.markdown("""
         box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
     }
     
-    /* TAMBAHKAN KODE BARU INI AGAR FOTO TIDAK ZOOM */
+    /* AGAR FOTO TIDAK ZOOM */
     .stApp img {
-        max-width: 65% !important; /* Batasi lebar foto agar tidak terlalu besar */
-        height: auto !important;    /* Rasio foto tetap proporsional (tidak gepeng) */
+        max-width: 65% !important;
+        height: auto !important;    
         display: block;
         margin-left: auto;
         margin-right: auto;
-        border-radius: 15px;       /* Sudut melengkung halus */
+        border-radius: 15px;       
     }
-    /* Khusus untuk logo kecil di dalam sidebar dan form agar tidak ikut mengecil */
+    /* Khusus untuk logo kecil di dalam sidebar agar tidak ikut mengecil */
     section[data-testid="stSidebar"] img, div[style*="align-items: center"] img, div[style*="box-shadow"] img {
         max-width: 100% !important;
         height: auto !important;
@@ -56,6 +63,7 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
 
 # 2. FUNGSI MEMUAT ANIMASI LOTTIE
 def load_lottieurl(url: str):
