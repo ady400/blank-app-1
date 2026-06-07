@@ -404,27 +404,30 @@ elif menu_pilihan == "📥 Input & Hasil Data":
         m_col1, m_col2, m_col3 = st.columns(3)
 
         with m_col1:
+            # Mengambil total berat data asli
             val_berat = int(st.session_state.b3_db['Berat (Kg)'].sum()) if not st.session_state.b3_db.empty else 0
             st.markdown(f"""
-                <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left;">
+                <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left; border-left: 5px solid #10b981;">
                     <span style="font-size: 13px; color: #64748b; font-weight: 600; display: block; margin-bottom: 5px;">TOTAL BERAT DATA</span>
-                    <span style="font-size: 24px; font-weight: 700; color: #1e293b; display: block;">{val_berat} Kg</span>
+                    <span style="font-size: 24px; font-weight: 700; color: #10b981; display: block;">{val_berat} Kg</span>
                 </div>
             """, unsafe_allow_html=True)
         
         with m_col2:
-            val_warning = len(st.session_state.b3_db[st.session_state.b3_db['Status'] == 'Peringatan']) if not st.session_state.b3_db.empty else 0
+            # Filter status Peringatan dengan toleransi spasi/huruf kapital
+            val_warning = len(st.session_state.b3_db[st.session_state.b3_db['Status'].str.any() & st.session_state.b3_db['Status'].astype(str).str.contains('Peringatan', case=False, na=False)]) if not st.session_state.b3_db.empty else 0
             st.markdown(f"""
-                <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left;">
+                <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left; border-left: 5px solid #f59e0b;">
                     <span style="font-size: 13px; color: #64748b; font-weight: 600; display: block; margin-bottom: 5px;">STATUS PERINGATAN</span>
                     <span style="font-size: 24px; font-weight: 700; color: #d97706; display: block;">{val_warning}</span>
                 </div>
             """, unsafe_allow_html=True)
         
         with m_col3:
-            val_kritis = len(st.session_state.b3_db[st.session_state.b3_db['Status'] == 'Kritis']) if not st.session_state.b3_db.empty else 0
+            # FIX LOGIKA: Menghitung status Kritis secara akurat dari dataframe tabel
+            val_kritis = len(st.session_state.b3_db[st.session_state.b3_db['Status'].str.any() & st.session_state.b3_db['Status'].astype(str).str.contains('Kritis', case=False, na=False)]) if not st.session_state.b3_db.empty else 0
             st.markdown(f"""
-                <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left;">
+                <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left; border-left: 5px solid #ef4444;">
                     <span style="font-size: 13px; color: #64748b; font-weight: 600; display: block; margin-bottom: 5px;">STATUS KRITIS</span>
                     <span style="font-size: 24px; font-weight: 700; color: #ef4444; display: block;">{val_kritis}</span>
                 </div>
