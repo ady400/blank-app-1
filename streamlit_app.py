@@ -249,7 +249,7 @@ with st.sidebar:
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("---")
-    st.caption("KELOMPOK 5")
+    st.caption("KELOMPOK 4")
     st.caption("Versi 1.0")
 # ==================== LOGIKA HALAMAN UTAMA ====================
 
