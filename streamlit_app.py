@@ -609,7 +609,7 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
             </div>
         </div>
         <p style="color: #94a3b8; font-size: 12px; margin-top: 25px;">
-            Aplikasi "Storify Waste" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Logika dan Pemrograman Komputer (LPK).
+    
         </p>
     """, unsafe_allow_html=True)
     
