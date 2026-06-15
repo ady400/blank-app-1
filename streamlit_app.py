@@ -236,11 +236,17 @@ with st.sidebar:
     st.markdown("---")
 
    # Pastikan tidak ada spasi sisa di awal baris jika ini di tingkat utama (global scope)
-   menu_pilihan = st.radio(
-    "Pilih Menu Navigasi:",
-    ["🏠 Beranda Utama", "📊 Input & Hasil Data", "📋 Prosedur Kedaruratan & SOP", "ℹ️ Tentang & Regulasi"]
-   )
-
+   with st.sidebar:
+    # ... (kode sidebar kamu yang lain di atas) ...
+    
+    st.markdown("---")
+    
+    # SEKARANG SUDAH SEJAJAR (DIBERI SPASI KE DALAM)
+    menu_pilihan = st.radio(
+        "Pilih Menu Navigasi:",
+        ["🏠 Beranda Utama", "📊 Input & Hasil Data", "📋 Prosedur Kedaruratan & SOP", "ℹ️ Tentang & Regulasi"]
+    )
+    
     st.markdown("---")
     
     # --- KOTAK NAMA ANGGOTA KELOMPOK BARU ---
