@@ -235,26 +235,12 @@ with st.sidebar:
     
     st.markdown("---")
 
-    menu_pilihan = st.radio(
+   menu_pilihan = st.radio(
         "Pilih Menu Navigasi:",
-        ["🏠 Beranda Utama", "📥 Input & Hasil Data", "📋 Prosedur Kedaruratan & SOP", "ℹ️ Tentang & Regulasi"]
+        ["🏠 Beranda Utama", "📥 Input & Hasil Data", "📋 Prosedur Kedaruratan & SOP", "ℹ️ Tentang, Regulasi & Pengembang"]
     )
     
     st.markdown("---")
-    
-    # --- KOOTAK NAMA ANGGOTA KELOMPOK BARU ---
-    st.markdown("""
-        <div style="background-color: rgba(255, 255, 255, 0.08); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
-            <b style="color: #f59e0b; font-size: 14px; display: block; margin-bottom: 6px; letter-spacing: 0.5px;">👥 KELOMPOK 4:</b>
-            <ul style="color: #ffffff; font-size: 13px; padding-left: 16px; margin: 0; line-height: 1.4;">
-                <li>Ajeng Ayu Dyah Putri</li>
-                <li>Fathiyya Rizkyana</li>
-                <li>Nadine Nareshwari Radisti</li>
-                <li>Namina Ratu Chessa Juniar</li>
-                <li>Naura Khairunnisa Istiadi</li>
-            </ul>
-        </div>
-    """, unsafe_allow_html=True)
     
     st.markdown("<br>", unsafe_allow_html=True)
     st.caption("Storify Waste v1.0")
@@ -567,7 +553,8 @@ elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
         """, unsafe_allow_html=True)
 
 # ℹ️ MENU 4: TENTANG & REGULASI
-elif menu_pilihan == "ℹ️ Tentang & Regulasi":
+# 📑 MENU 4: TENTANG, REGULASI & PENGEMBANG
+elif menu_pilihan == "ℹ️ Tentang, Regulasi & Pengembang":
     st.markdown("""
         <div style="text-align: center; margin-bottom: 20px;">
             <img src="https://i.pinimg.com/736x/f5/82/78/f582784694c468fa39d383f98f821b19.jpg" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Regulasi">
@@ -576,11 +563,11 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
 
     st.markdown("""
         <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 10px 0;">
-            <h1 style="color: #4ade80; font-size: 34px; font-weight: 800; margin-bottom: 12px;">
-                Informasi Pengembang & Regulasi Acuan
+            <h1 style="color: #059669; font-size: 34px; font-weight: 800; margin-bottom: 12px;">
+                Landasan Hukum & Tim Pengembang
             </h1>
             <p style="color: #64748b; font-size: 16px; line-height: 1.5; margin-bottom: 15px;">
-                Kepatuhan limbah industri berdasarkan regulasi hukum yang ada Indonesia.
+                Informasi mengenai batas waktu penyimpanan legal, dasar hukum, serta profil pengembang Storify Waste.
             </p>
         </div>
     """, unsafe_allow_html=True)
@@ -588,23 +575,78 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
     if lottie_about:
         col_la1, col_la2, col_la3 = st.columns([1, 1, 1])
         with col_la2:
-            st_lottie(lottie_about, speed=1, quality="high", height=90, key="about_menu_top")
-                
+            st_lottie(lottie_about, speed=1, quality="high", height=90, key="about_lottie")
+            
     st.markdown("---")
     
-    st.markdown("### 📚 Dasar Hukum & Standar Teknis")
-    st.markdown("""
-        Penentuan piktogram bahaya, batas masa simpan, serta baku penyimpanan dalam aplikasi ini disesuaikan sepenuhnya dengan:
-        * 📜 **Peraturan Pemerintah (PP) No. 22 Tahun 2021** – Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup (Khusus Lampiran IX terkait pengelolaan limbah B3).
-        * 📜 **Peraturan Menteri LHK No. 6 Tahun 2021** – Tata Cara dan Persyaratan Pengelolaan Limbah Bahan Berbahaya dan Beracun.
-        * 🌐 **Globally Harmonized System (GHS)** – Standar Piktogram Global internasional untuk pelabelan simbol bahaya zat kimia aktif.
-        """)
+    # Bagian 1: Regulasi & Dasar Hukum (2 Kolom)
+    reg_col1, reg_col2 = st.columns(2)
     
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    
-    st.markdown("### 👥 Tentang Pengembang")
-    st.markdown("**Kelompok 4**")
-    st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Pengolahan Limbah Industri</p>", unsafe_allow_html=True)
-    st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
-    st.markdown("<p style='font-size: 13px; color: #9ca3af; font-style: italic;'>Aplikasi \"Storify Waste\" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Logika dan Pemrograman Komputer (LPK).</p>", unsafe_allow_html=True)
+    with reg_col1:
+        st.markdown("""
+            <div style="background-color: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); height: 260px;">
+                <h4 style="color: #0f172a; margin-top: 0; border-bottom: 2px solid #10b981; padding-bottom: 8px;">📜 Dasar Hukum Utama</h4>
+                <ul style="color: #475569; font-size: 14px; line-height: 1.7; padding-left: 20px;">
+                    <li><b>PP No. 22 Tahun 2021</b> tentang Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup.</li>
+                    <li><b>Permen LHK No. 6 Tahun 2021</b> tentang Persyaratan Pengelolaan Limbah B3.</li>
+                    <li><b>Kepdal Bapedal No. 01/1995</b> mengenai Persyaratan Teknis Penyimpanan Limbah B3.</li>
+                </ul>
+            </div>
+        """, unsafe_allow_html=True)
+        
+    with reg_col2:
+        st.markdown("""
+            <div style="background-color: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); height: 260px;">
+                <h4 style="color: #0f172a; margin-top: 0; border-bottom: 2px solid #f59e0b; padding-bottom: 8px;">⏳ Ketentuan Masa Simpan Legal</h4>
+                <p style="color: #475569; font-size: 14px; line-height: 1.6; margin-bottom: 10px;">
+                    Batas penyimpanan di TPS diatur berdasarkan kategori limbah:
+                </p>
+                <ul style="color: #475569; font-size: 14px; line-height: 1.6; padding-left: 20px;">
+                    <li><b>Maksimal 90 Hari:</b> Untuk limbah B3 kategori 1 (dihasilkan ≥ 50 kg/hari).</li>
+                    <li><b>Maksimal 180 Hari:</b> Untuk limbah B3 kategori 1 (dihasilkan < 50 kg/hari).</li>
+                    <li><b>Maksimal 365 Hari:</b> Untuk limbah B3 kategori 2.</li>
+                </ul>
+            </div>
+        """, unsafe_allow_html=True)
 
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Bagian 2: MENU PENGEMBANG (NAMA-NAMA KELOMPOK 4)
+    st.markdown("### 💻 Tim Pengembang Aplikasi")
+    
+    st.markdown("""
+        <div style="background-color: #f8fafc; padding: 25px; border-radius: 15px; border: 1px solid #e2e8f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
+            <h4 style="color: #0f4c3a; margin-top: 0; margin-bottom: 15px; font-weight: 700;">👥 KELOMPOK 4</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
+                <div style="background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                    <span style="font-size: 11px; color: #94a3b8; font-weight: 600; display: block;">ENGINEER / DESIGNER</span>
+                    <b style="color: #1e293b; font-size: 14px;">Ajeng Ayu Dyah Putri</b>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                    <span style="font-size: 11px; color: #94a3b8; font-weight: 600; display: block;">ENGINEER / DESIGNER</span>
+                    <b style="color: #1e293b; font-size: 14px;">Fathiyya Rizkyana</b>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                    <span style="font-size: 11px; color: #94a3b8; font-weight: 600; display: block;">ENGINEER / DESIGNER</span>
+                    <b style="color: #1e293b; font-size: 14px;">Nadine Nareshwari Radisti</b>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                    <span style="font-size: 11px; color: #94a3b8; font-weight: 600; display: block;">ENGINEER / DESIGNER</span>
+                    <b style="color: #1e293b; font-size: 14px;">Namina Ratu Chessa Juniar</b>
+                </div>
+                <div style="background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                    <span style="font-size: 11px; color: #94a3b8; font-weight: 600; display: block;">ENGINEER / DESIGNER</span>
+                    <b style="color: #1e293b; font-size: 14px;">Naura Khairunnisa Istiadi</b>
+                </div>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    st.markdown("""
+        <div style="background-color: #f1f5f9; padding: 15px; border-radius: 8px; text-align: center;">
+            <p style="color: #64748b; font-size: 13px; margin: 0;">
+                💡 <b>Catatan Audit:</b> Melewati batas penyimpanan di atas tanpa manifes kelanjutan (izin manifest pemanfaatan/pemusnahan eksternal) dapat dikenakan sanksi administratif hingga pembekuan izin lingkungan perusahaan.
+            </p>
+        </div>
+    """, unsafe_allow_html=True)
