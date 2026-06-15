@@ -415,7 +415,7 @@ elif menu_pilihan == "📥 Input & Hasil Data":
         
         m_col1, m_col2, m_col3 = st.columns(3)
 
-       m_col1, m_col2, m_col3 = st.columns(3)
+        m_col1, m_col2, m_col3 = st.columns(3)
 
     with m_col1:
         val_berat = int(st.session_state.b3_db['Berat (Kg)'].sum()) if not st.session_state.b3_db.empty else 0
