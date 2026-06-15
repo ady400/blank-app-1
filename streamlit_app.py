@@ -630,7 +630,6 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
     
     st.markdown("<br><br>", unsafe_allow_html=True)
     
-    st.markdown("### 👥 Tentang Pengembang")
     st.markdown("**Kelompok 4**")
     st.markdown("<p style='color: #6b7280; font-size: 14px; margin-bottom: 15px;'>Pengolahan Limbah Industri</p>", unsafe_allow_html=True)
     st.markdown("<hr style='border-color: #e5e7eb; margin: 10px 0;'>", unsafe_allow_html=True)
