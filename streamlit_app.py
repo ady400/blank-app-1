@@ -7,11 +7,10 @@ from streamlit_lottie import st_lottie
 
 # 1. PENGATURAN HALAMAN & CUSTOM CSS GLOBAL (HIJAU TUA DEEP FOREST)
 st.set_page_config(
-    page_title="Storify Waste",
-    page_icon="☣️",
-    layout="wide"
+    page_title="Storify Waste",
+    page_icon="☣️",
+    layout="wide"
 )
-
 # Custom CSS Global dengan Sidebar Hijau Tua Pekat/Gelap
 st.markdown("""
     <style>
