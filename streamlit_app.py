@@ -567,46 +567,50 @@ elif menu_pilihan == "ℹ️ Tentang & Regulasi":
         </div>
     """, unsafe_allow_html=True)
 
-    # Memuat animasi Lottie untuk menu tentang
-    if lottie_about:
+    # Memuat animasi Lottie untuk menu tentang (jika ada)
+    if 'lottie_about' in globals() and lottie_about:
         col_la1, col_la2, col_la3 = st.columns([1, 1, 1])
         with col_la2:
             st_lottie(lottie_about, speed=1, quality="high", height=130, key="about_lottie")
 
-    st.markdown("---")
+    # --- Bagian Regulasi Anda Sebelumnya (bisa ditaruh di sini jika ada teks tambahan) ---
 
-    # KOTAK INFORMASI TIM PENGEMBANG (KELOMPOK 4)
+    st.markdown("---")
+    
+    # 👥 BAGIAN TENTANG PENGEMBANG (KELOMPOK 4)
+    st.markdown("## 👥 Tentang Pengembang")
+    st.markdown("### Kelompok 4")
+    st.markdown("<p style='color: #64748b; font-style: italic;'>Pengolahan Limbah Industri</p>", unsafe_allow_html=True)
+    
+    # Kotak List Nama Anggota Tim
     st.markdown("""
-        <div style="background-color: #ffffff; padding: 30px; border-radius: 15px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); max-width: 700px; margin: 0 auto;">
-            <h3 style="color: #0f4c3a; text-align: center; margin-top: 0; margin-bottom: 25px; font-weight: 700; letter-spacing: 0.5px;">
-                🚀 Tim Pengembang Aplikasi
-            </h3>
-            <div style="font-size: 15px; color: #334155; line-height: 1.8;">
-                <p style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin: 12px 0; display: flex; justify-content: space-between;">
-                    <span>⭐ <b>Ajeng Ayu Dyah Putri</b></span>
-                    <span style="color: #64748b; font-weight: 500;">Kelompok 4</span>
+        <div style="background-color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px rgba(0,0,0,0.03); max-width: 600px; margin-top: 15px;">
+            <div style="font-size: 15px; color: #1e293b; line-height: 1.8;">
+                <p style="border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; margin: 10px 0; display: flex; justify-content: space-between;">
+                    <span>🌿 <b>Ajeng Ayu Dyah Putri</b></span>
+                    <span style="color: #0f4c3a; font-weight: 600;">Anggota</span>
                 </p>
-                <p style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin: 12px 0; display: flex; justify-content: space-between;">
-                    <span>⭐ <b>Fathiyya Rizkyana</b></span>
-                    <span style="color: #64748b; font-weight: 500;">Kelompok 4</span>
+                <p style="border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; margin: 10px 0; display: flex; justify-content: space-between;">
+                    <span>🌿 <b>Fathiyya Rizkyana</b></span>
+                    <span style="color: #0f4c3a; font-weight: 600;">Anggota</span>
                 </p>
-                <p style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin: 12px 0; display: flex; justify-content: space-between;">
-                    <span>⭐ <b>Nadine Nareshwari Radisti</b></span>
-                    <span style="color: #64748b; font-weight: 500;">Kelompok 4</span>
+                <p style="border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; margin: 10px 0; display: flex; justify-content: space-between;">
+                    <span>🌿 <b>Nadine Nareshwari Radisti</b></span>
+                    <span style="color: #0f4c3a; font-weight: 600;">Anggota</span>
                 </p>
-                <p style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin: 12px 0; display: flex; justify-content: space-between;">
-                    <span>⭐ <b>Namina Ratu Chessa Juniar</b></span>
-                    <span style="color: #64748b; font-weight: 500;">Kelompok 4</span>
+                <p style="border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; margin: 10px 0; display: flex; justify-content: space-between;">
+                    <span>🌿 <b>Namina Ratu Chessa Juniar</b></span>
+                    <span style="color: #0f4c3a; font-weight: 600;">Anggota</span>
                 </p>
-                <p style="border-bottom: 1px dashed #cbd5e1; padding-bottom: 8px; margin: 12px 0; display: flex; justify-content: space-between;">
-                    <span>⭐ <b>Naura Khairunnisa Istiadi</b></span>
-                    <span style="color: #64748b; font-weight: 500;">Kelompok 4</span>
+                <p style="border-bottom: 1px dashed #e2e8f0; padding-bottom: 8px; margin: 10px 0; display: flex; justify-content: space-between;">
+                    <span>🌿 <b>Naura Khairunnisa Istiadi</b></span>
+                    <span style="color: #0f4c3a; font-weight: 600;">Anggota</span>
                 </p>
             </div>
-            <p style="text-align: center; color: #94a3b8; font-size: 13px; margin-top: 30px; margin-bottom: 0;">
-                © 2026 Storify Waste • Hak Cipta Dilindungi Undang-Undang.
-            </p>
         </div>
+        <p style="color: #94a3b8; font-size: 12px; margin-top: 25px;">
+            Aplikasi "Storify Waste" ini dikembangkan seluruhnya untuk memenuhi tugas proyek akhir Logika dan Pemrograman Komputer (LPK).
+        </p>
     """, unsafe_allow_html=True)
     
     if lottie_about:
