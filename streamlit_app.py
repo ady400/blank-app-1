@@ -235,15 +235,15 @@ with st.sidebar:
     
     st.markdown("---")
 
-   menu_pilihan = st.radio(
+    menu_pilihan = st.radio(
         "Pilih Menu Navigasi:",
         ["🏠 Beranda Utama", "📥 Input & Hasil Data", "📋 Prosedur Kedaruratan & SOP", "ℹ️ Tentang, Regulasi & Pengembang"]
     )
     
     st.markdown("---")
-    
     st.markdown("<br>", unsafe_allow_html=True)
     st.caption("Storify Waste v1.0")
+
 # ==================== LOGIKA HALAMAN UTAMA ====================
 
 # 📑 MENU 1: BERANDA UTAMA
@@ -377,7 +377,7 @@ elif menu_pilihan == "📥 Input & Hasil Data":
                 "Jenis Limbah": jenis_limbah,
                 "Karakteristik / Simbol": char_name,
                 "Rekomendasi Wadah": wadah_oto,
-                "Berat (Kg)": int(berat),  # <-- GANTI MENJADI SEPERTI INI
+                "Berat (Kg)": int(berat),
                 "Tanggal Masuk": tgl_masuk,
                 "Batas Hari": f"{batas_hari} Hari",
                 "Sisa Hari": sisa_hari,
@@ -406,247 +406,6 @@ elif menu_pilihan == "📥 Input & Hasil Data":
             """, unsafe_allow_html=True)
         
         with m_col2:
-            # Filter aman menggunakan query string matching bawaan pandas (.str.contains) tanpa campuran .any()
             val_warning = len(st.session_state.b3_db[st.session_state.b3_db['Status'].astype(str).str.contains('Peringatan', case=False, na=False)]) if not st.session_state.b3_db.empty else 0
             st.markdown(f"""
-                <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left; border-left: 5px solid #f59e0b;">
-                    <span style="font-size: 13px; color: #64748b; font-weight: 600; display: block; margin-bottom: 5px;">STATUS PERINGATAN</span>
-                    <span style="font-size: 24px; font-weight: 700; color: #d97706; display: block;">{val_warning}</span>
-                </div>
-            """, unsafe_allow_html=True)
-        
-        with m_col3:
-            # Filter aman untuk status Kritis, dijamin membaca angka 1 dengan akurat
-            val_kritis = len(st.session_state.b3_db[st.session_state.b3_db['Status'].astype(str).str.contains('Kritis', case=False, na=False)]) if not st.session_state.b3_db.empty else 0
-            st.markdown(f"""
-                <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left; border-left: 5px solid #ef4444;">
-                    <span style="font-size: 13px; color: #64748b; font-weight: 600; display: block; margin-bottom: 5px;">STATUS KRITIS</span>
-                    <span style="font-size: 24px; font-weight: 700; color: #ef4444; display: block;">{val_kritis}</span>
-                </div>
-            """, unsafe_allow_html=True)
-                        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        if st.session_state.b3_db.empty:
-            st.markdown("""
-                <div style="border: 2px dashed #cbd5e1; padding: 40px; text-align: center; border-radius: 12px; background-color: #f8fafc; margin-top: 10px;">
-                    <p style="color: #94a3b8; font-size: 16px; margin: 0;">Logbook kosong. Silakan input manifes baru untuk memantau waktu tampung.</p>
-                </div>
-            """, unsafe_allow_html=True)
-        else:
-            def color_status(val):
-                if "KRITIS" in str(val):
-                    return "background-color: #fee2e2; color: #991b1b; font-weight: bold;"
-                elif "Peringatan" in str(val):
-                    return "background-color: #fef3c7; color: #92400e; font-weight: bold;"
-                return "background-color: #d1fae5; color: #065f46;"
-
-            try:
-                df_styled = st.session_state.b3_db.style.map(color_status, subset=["Status"])
-            except AttributeError:
-                df_styled = st.session_state.b3_db.style.applymap(color_status, subset=["Status"])
-                
-            st.dataframe(
-                df_styled, 
-                use_container_width=True, 
-                hide_index=True,
-                column_config={
-                    "Berat (Kg)": st.column_config.NumberColumn(
-                        "Berat (Kg)",
-                        format="%d"  # <-- Menghilangkan semua angka nol di belakang koma
-                    )
-                }
-            )
-            st.markdown("<br>", unsafe_allow_html=True)
-            
-            ut1, ut2 = st.columns([2, 1])
-            with ut1:
-                csv_data = st.session_state.b3_db.to_csv(index=False).encode('utf-8')
-                st.download_button(
-                    label="📥 Ekspor Laporan Logbook Resmi (.CSV)",
-                    data=csv_data,
-                    file_name=f"Logbook_TPS_B3_{date.today()}.csv",
-                    mime="text/csv",
-                    use_container_width=True
-                )
-            with ut2:
-                if st.button("Kosongkan Logbook 🗑️", use_container_width=True):
-                    st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
-                    st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
-                    st.html("<script>window.location.reload();</script>")
-
-# 📋 MENU 3: PROSEDUR KEDARURATAN & SOP
-elif menu_pilihan == "📋 Prosedur Kedaruratan & SOP":
-    st.markdown("""
-        <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://i.pinimg.com/1200x/b0/ac/91/b0ac9167fdb7fa83a26d95e6d4a3cda1.jpg" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Prosedur K3">
-        </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-        <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 10px 0;">
-            <h1 style="color: #059669; font-size: 34px; font-weight: 800; margin-bottom: 12px;">
-                Panduan K3 & Penanganan Teknis Limbah B3
-            </h1>
-            <p style="color: #64748b; font-size: 16px; line-height: 1.5; margin-bottom: 15px;">
-                Standar Operasional Prosedur (SOP) tanggap darurat kebocoran, APD wajib, and pertolongan pertama.
-            </p>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    if lottie_safety:
-        col_ls1, col_ls2, col_ls3 = st.columns([1, 1, 1])
-        with col_ls2:
-            st_lottie(lottie_safety, speed=1, quality="high", height=90, key="safety_lottie")
-            
-    st.markdown("---")
-    st.markdown("### Pilih Jenis Limbah untuk Melihat Prosedur Spesifik:")
-    limbah_terpilled = st.selectbox("Tampilkan Prosedur Penanganan:", list(B3_DATABASE.keys()))
-    
-    data_opsi = B3_DATABASE[limbah_terpilled]
-    st.markdown("<br>", unsafe_allow_html=True)
-    
-    st.markdown(f"""
-        <div style="background-color: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px; display: flex; align-items: center; gap: 25px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
-            <img src="{data_opsi['logo_url']}" width="90" alt="Logo Resmi">
-            <div>
-                <span style="font-size: 14px; color: #64748b; font-weight: 500;">Klasifikasi Bahaya GHS Resmi:</span>
-                <h3 style="color: #ef4444; margin: 4px 0 0 0; font-weight: 800;">{data_opsi['karakteristik']}</h3>
-                <p style="color: #475569; margin: 5px 0 0 0; font-size: 15px;"><b>Objek Data:</b> {limbah_terpilled}</p>
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    c1, c2 = st.columns([2, 1])
-    with c1:
-        sop_html = "".join([f"<li>{item}</li>" for item in data_opsi["sop_kebocoran"]])
-        st.markdown(f"""
-            <div style="background-color: #fffbeb; border-left: 6px solid #d97706; padding: 25px; border-radius: 8px; margin-bottom: 20px;">
-                <h4 style="margin-top:0; color: #92400e; font-size: 18px;">⚠️ SOP Penanganan Tumpahan / Kebocoran Teknis</h4>
-                <ol style="margin-bottom:0; padding-left:20px; line-height:1.7; color: #451a03;">
-                    {sop_html}
-                </ol>
-            </div>
-        """, unsafe_allow_html=True)
-        
-        fa_html = "".join([f"<li>{item}</li>" for item in data_opsi["first_aid"]])
-        st.markdown(f"""
-            <div style="background-color: #fee2e2; border-left: 6px solid #dc2626; padding: 25px; border-radius: 8px; margin-bottom: 25px;">
-                <h4 style="margin-top:0; color: #991b1b; font-size: 18px;">🚑 Pertolongan Pertama Korban Paparan (First Aid)</h4>
-                <ul style="margin-bottom:0; padding-left:20px; line-height:1.7; color: #7f1d1d;">
-                    {fa_html}
-                </ul>
-            </div>
-        """, unsafe_allow_html=True)
-        
-    with c2:
-        apd_html = "".join([f"<li style='margin-bottom:8px;'>{item}</li>" for item in data_opsi["apd"]])
-        st.markdown(f"""
-            <div style="background-color: #ffffff; color: #334155; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
-                <h4 style="color: #059669; margin-top:0; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; font-size: 18px;">🦺 APD Wajib Petugas</h4>
-                <ul style="padding-left:20px; color: #475569; line-height:1.6; font-size: 15px;">
-                    {apd_html}
-                </ul>
-                <hr style="border-color: #e2e8f0; margin: 15px 0;">
-                <small style="color: #94a3b8; display:block; text-align:center;">SOP ini mengacu pada lembar data keselamatan bahan (MSDS).</small>
-            </div>
-        """, unsafe_allow_html=True)
-
-# ℹ️ MENU 4: TENTANG & REGULASI
-# 📑 MENU 4: TENTANG, REGULASI & PENGEMBANG
-elif menu_pilihan == "ℹ️ Tentang, Regulasi & Pengembang":
-    st.markdown("""
-        <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://i.pinimg.com/736x/f5/82/78/f582784694c468fa39d383f98f821b19.jpg" style="width: 100%; max-height: 350px; object-fit: cover; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);" alt="Landscape Regulasi">
-        </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("""
-        <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 10px 0;">
-            <h1 style="color: #059669; font-size: 34px; font-weight: 800; margin-bottom: 12px;">
-                Landasan Hukum & Tim Pengembang
-            </h1>
-            <p style="color: #64748b; font-size: 16px; line-height: 1.5; margin-bottom: 15px;">
-                Informasi mengenai batas waktu penyimpanan legal, dasar hukum, serta profil pengembang Storify Waste.
-            </p>
-        </div>
-    """, unsafe_allow_html=True)
-    
-    if lottie_about:
-        col_la1, col_la2, col_la3 = st.columns([1, 1, 1])
-        with col_la2:
-            st_lottie(lottie_about, speed=1, quality="high", height=90, key="about_lottie")
-            
-    st.markdown("---")
-    
-    # Bagian 1: Regulasi & Dasar Hukum (2 Kolom)
-    reg_col1, reg_col2 = st.columns(2)
-    
-    with reg_col1:
-        st.markdown("""
-            <div style="background-color: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); height: 260px;">
-                <h4 style="color: #0f172a; margin-top: 0; border-bottom: 2px solid #10b981; padding-bottom: 8px;">📜 Dasar Hukum Utama</h4>
-                <ul style="color: #475569; font-size: 14px; line-height: 1.7; padding-left: 20px;">
-                    <li><b>PP No. 22 Tahun 2021</b> tentang Penyelenggaraan Perlindungan dan Pengelolaan Lingkungan Hidup.</li>
-                    <li><b>Permen LHK No. 6 Tahun 2021</b> tentang Persyaratan Pengelolaan Limbah B3.</li>
-                    <li><b>Kepdal Bapedal No. 01/1995</b> mengenai Persyaratan Teknis Penyimpanan Limbah B3.</li>
-                </ul>
-            </div>
-        """, unsafe_allow_html=True)
-        
-    with reg_col2:
-        st.markdown("""
-            <div style="background-color: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); height: 260px;">
-                <h4 style="color: #0f172a; margin-top: 0; border-bottom: 2px solid #f59e0b; padding-bottom: 8px;">⏳ Ketentuan Masa Simpan Legal</h4>
-                <p style="color: #475569; font-size: 14px; line-height: 1.6; margin-bottom: 10px;">
-                    Batas penyimpanan di TPS diatur berdasarkan kategori limbah:
-                </p>
-                <ul style="color: #475569; font-size: 14px; line-height: 1.6; padding-left: 20px;">
-                    <li><b>Maksimal 90 Hari:</b> Untuk limbah B3 kategori 1 (dihasilkan ≥ 50 kg/hari).</li>
-                    <li><b>Maksimal 180 Hari:</b> Untuk limbah B3 kategori 1 (dihasilkan < 50 kg/hari).</li>
-                    <li><b>Maksimal 365 Hari:</b> Untuk limbah B3 kategori 2.</li>
-                </ul>
-            </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown("<br>", unsafe_allow_html=True)
-
-    # Bagian 2: MENU PENGEMBANG (NAMA-NAMA KELOMPOK 4)
-    st.markdown("### 💻 Tim Pengembang Aplikasi")
-    
-    st.markdown("""
-        <div style="background-color: #f8fafc; padding: 25px; border-radius: 15px; border: 1px solid #e2e8f0; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
-            <h4 style="color: #0f4c3a; margin-top: 0; margin-bottom: 15px; font-weight: 700;">👥 KELOMPOK 4</h4>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;">
-                <div style="background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
-                    <span style="font-size: 11px; color: #94a3b8; font-weight: 600; display: block;">ENGINEER / DESIGNER</span>
-                    <b style="color: #1e293b; font-size: 14px;">Ajeng Ayu Dyah Putri</b>
-                </div>
-                <div style="background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
-                    <span style="font-size: 11px; color: #94a3b8; font-weight: 600; display: block;">ENGINEER / DESIGNER</span>
-                    <b style="color: #1e293b; font-size: 14px;">Fathiyya Rizkyana</b>
-                </div>
-                <div style="background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
-                    <span style="font-size: 11px; color: #94a3b8; font-weight: 600; display: block;">ENGINEER / DESIGNER</span>
-                    <b style="color: #1e293b; font-size: 14px;">Nadine Nareshwari Radisti</b>
-                </div>
-                <div style="background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
-                    <span style="font-size: 11px; color: #94a3b8; font-weight: 600; display: block;">ENGINEER / DESIGNER</span>
-                    <b style="color: #1e293b; font-size: 14px;">Namina Ratu Chessa Juniar</b>
-                </div>
-                <div style="background: white; padding: 15px; border-radius: 10px; border-left: 4px solid #10b981; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
-                    <span style="font-size: 11px; color: #94a3b8; font-weight: 600; display: block;">ENGINEER / DESIGNER</span>
-                    <b style="color: #1e293b; font-size: 14px;">Naura Khairunnisa Istiadi</b>
-                </div>
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("<br><br>", unsafe_allow_html=True)
-    st.markdown("""
-        <div style="background-color: #f1f5f9; padding: 15px; border-radius: 8px; text-align: center;">
-            <p style="color: #64748b; font-size: 13px; margin: 0;">
-                💡 <b>Catatan Audit:</b> Melewati batas penyimpanan di atas tanpa manifes kelanjutan (izin manifest pemanfaatan/pemusnahan eksternal) dapat dikenakan sanksi administratif hingga pembekuan izin lingkungan perusahaan.
-            </p>
-        </div>
-    """, unsafe_allow_html=True)
+                <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0
