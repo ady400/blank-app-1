@@ -184,14 +184,12 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("<h2 style='text-align: center; margin-bottom: 0;'>Storify Waste</h2>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align: center; color: #334155; font-size: 14px;'>Sistem Kepatuhan TPS Digital</p>", unsafe_allow_html=True)
+    st.markdown("<p style='text-align: center; color: #cbd5e1; font-size: 14px;'>Sistem Kepatuhan TPS Digital</p>", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
     # --- FITUR UTAMA: RUANG PENYIMPANAN TERPISAH (VERSI FIX VISUAL) ---
-    # Judul dibuat warna kuning emas menyala agar kontras dan terbaca jelas
     st.markdown("<h3 style='color: #f59e0b; font-size: 19px; font-weight: 700; margin-bottom: 5px; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);'>🔑 Akses Ruang TPS</h3>", unsafe_allow_html=True)
     
-    # Menghapus default value 'Default_TPS', diganti kosong + placeholder petunjuk
     id_tps_user = st.text_input(
         "Masukkan ID / Nama Perusahaan:", 
         value="", 
@@ -199,7 +197,6 @@ with st.sidebar:
         help="Ketik nama pabrik/perusahaan Anda. Sistem akan otomatis membuatkan atau memuat folder database khusus untuk Anda agar tidak bercampur dengan pengguna lain."
     ).strip()
     
-    # Pengkondisian cerdas: Jika kolom masih kosong/baru dibuka, arahkan ke Ruang Publik bawaan agar tidak eror
     if not id_tps_user:
         nama_file_aktif = "ruang_publik"
         nama_tampilan = "Ruang Publik (Belum Masuk)"
@@ -207,11 +204,9 @@ with st.sidebar:
         nama_file_aktif = id_tps_user.replace(" ", "_")
         nama_tampilan = id_tps_user.replace("_", " ")
     
-    # Generate nama file .csv unik berdasarkan input user secara realtime
     NAMA_FILE_DB = f"database_tps_{nama_file_aktif}.csv"
     KOLOM_DATABASE = ["ID Limbah", "Jenis Limbah", "Karakteristik / Simbol", "Rekomendasi Wadah", "Berat (Kg)", "Tanggal Masuk", "Batas Hari", "Sisa Hari", "Status"]
 
-    # Logika otomatisasi pembuatan berkas database terisolasi
     if "current_tps_id" not in st.session_state or st.session_state.current_tps_id != nama_file_aktif:
         st.session_state.current_tps_id = nama_file_aktif
         if os.path.exists(NAMA_FILE_DB):
@@ -225,7 +220,6 @@ with st.sidebar:
             st.session_state.b3_db = pd.DataFrame(columns=KOLOM_DATABASE)
             st.session_state.b3_db.to_csv(NAMA_FILE_DB, index=False)
             
-    # CARD SHAPE BARU: Menggunakan gradasi emerald cerah dan border neon tipis agar teks putih di dalamnya menonjol tajam
     st.markdown(f"""
         <div style="background: linear-gradient(135deg, #059669 0%, #10b981 100%); 
                     padding: 14px; 
@@ -240,17 +234,30 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
-    # -----------------------------------------------------------------
 
     menu_pilihan = st.radio(
         "Pilih Menu Navigasi:",
         ["🏠 Beranda Utama", "📥 Input & Hasil Data", "📋 Prosedur Kedaruratan & SOP", "ℹ️ Tentang & Regulasi"]
     )
     
-    st.markdown("<br><br>", unsafe_allow_html=True)
     st.markdown("---")
-    st.caption("KELOMPOK 4")
-    st.caption("Versi 1.0")
+    
+    # --- KOOTAK NAMA ANGGOTA KELOMPOK BARU ---
+    st.markdown("""
+        <div style="background-color: rgba(255, 255, 255, 0.08); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15);">
+            <b style="color: #f59e0b; font-size: 14px; display: block; margin-bottom: 6px; letter-spacing: 0.5px;">👥 KELOMPOK 4:</b>
+            <ul style="color: #ffffff; font-size: 13px; padding-left: 16px; margin: 0; line-height: 1.4;">
+                <li>Ajeng Ayu Dyah Putri</li>
+                <li>Fathiyya Rizkyana</li>
+                <li>Nadine Nareshwari Radisti</li>
+                <li>Namina Ratu Chessa Juniar</li>
+                <li>Naura Khairunnisa Istiadi</li>
+            </ul>
+        </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.caption("Storify Waste v1.0")
 # ==================== LOGIKA HALAMAN UTAMA ====================
 
 # 📑 MENU 1: BERANDA UTAMA
