@@ -3,88 +3,48 @@ import pandas as pd
 from datetime import datetime, date
 import requests
 import os
-from streamlit_lottie import st_lottie
+from streamlit_lottie import import st_lottie
 
-# 1. PENGATURAN HALAMAN & CUSTOM CSS GLOBAL (HIJAU TUA DEEP FOREST)
+# # 1. PENGATURAN HALAMAN & CUSTOM CSS GLOBAL (HIJAU TUA DEEP FOREST)
 st.set_page_config(
     page_title="Storify Waste",
     page_icon="☣️",
     layout="wide"
 )
-# Custom CSS Global dengan Sidebar Hijau Tua Pekat/Gelap
+
+# # Custom CSS Global dengan Sidebar Hijau Tua Pekat/Gelap
 st.markdown("""
-    <style>
-    .stApp {
-        background-color: #fdfdfd;
-    }
-    
-    /* SIDEBAR HIJAU TUA AGAL GELAP (DEEP FOREST GREEN) */
-    section[data-testid="stSidebar"] {
-        background-color: #0f4c3a !important; /* Warna hijau botol tua pekat */
-    }
-    
-    /* Memastikan teks di sidebar berwarna putih bersih agar kontras dengan background gelap */
-    section[data-testid="stSidebar"] h2, 
-    section[data-testid="stSidebar"] p, 
-    section[data-testid="stSidebar"] span, 
-    section[data-testid="stSidebar"] label {
-        color: #ffffff !important;
-    }
-    
-    /* WARNA IKON TANDA TANYA (HELP) BIAR PUTIH TERANG NYALA */
-    section[data-testid="stSidebar"] button[data-testid="stTooltipHoverTarget"] svg {
-        fill: #ffffff !important;
-        color: #ffffff !important;
-        filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6));
-    }
-    
-    /* Desain Tombol Utama (Button) */
-    div.stButton > button:first-child {
-        background-color: #10b981;
-        color: white;
-        border-radius: 8px;
-        border: none;
-        padding: 10px 24px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }
-    div.stButton > button:first-child:hover {
-        background-color: #059669;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-    }
-    
-    /* AGAR FOTO TIDAK ZOOM */
-    .stApp img {
-        max-width: 65% !important;
-        height: auto !important;    
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 15px;       
-    }
-    /* Khusus untuk logo kecil di dalam sidebar agar tidak melar */
-    section[data-testid="stSidebar"] img, div[style*="align-items: center"] img, div[style*="box-shadow"] img {
-        max-width: 100% !important;
-        height: auto !important;
-        display: inline-block;
-    }
-    </style>
+<style>
+    .stApp {
+        background-color: #fdfdfd;
+    }
+    
+    /* SIDEBAR HIJAU TUA AGAL GELAP (DEEP FOREST GREEN) */
+    section[data-testid="stSidebar"] {
+        background-color: #0f4c3a !important; /* Warna hijau botol tua pekat */
+    }
+    
+    section[data-testid="stSidebar"] img, div[style*="align-items: center"] img, div[style*="box-shadow"] img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: inline-block;
+    }
+</style>
 """, unsafe_allow_html=True)
 
-# 2. FUNGSI MEMUAT ANIMASI LOTTIE
+# # 2. FUNGSI MEMUAT ANIMASI LOTTIE
 def load_lottieurl(url: str):
-    try:
-        r = requests.get(url, timeout=5)
-        if r.status_code == 200:
-            return r.json()
-    except:
-        return None
-    return None
+    try:
+        r = requests.get(url, timeout=5)
+        if r.status_code == 200:
+            return r.json()
+    except:
+        return None
+    return None
 
-lottie_home = load_lottieurl("https://lottie.host/947d937e-1b76-43a0-b786-d255c0ee1e74/stE5uwmVhW.json") 
-lottie_form = load_lottieurl("https://lottie.host/409d6f6a-ce07-4286-9a25-9b24765ff0f5/H6q8S0vXzH.json") 
-lottie_about = load_lottieurl("https://lottie.host/51e3db3d-ef04-45fb-bc76-efdbb0cae5eb/tqNUnVjY02.json") 
+lottie_home = load_lottieurl("https://lottie.host/947d937e-1b76-43a0-b786-d255c0ee1e74/stE5uwmVhW.json")
+lottie_form = load_lottieurl("https://lottie.host/409d6f6a-ce07-4286-9a25-9b24765ff0f5/H6q8S0vXzH.json")
+lottie_about = load_lottieurl("https://lottie.host/51e3db3d-ef04-45fb-bc76-efdbb0cae5eb/tqNUnVjy02.json")
 lottie_safety = load_lottieurl("https://lottie.host/bc796e94-3cb1-447a-b5e1-db3496c81bf4/cM6wWbyf3T.json")
 
 # 3. DATABASE DENGAN LOGO B3 RESMI & DATA PENANGANAN LENGKAP
