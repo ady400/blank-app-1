@@ -424,11 +424,11 @@ elif menu_pilihan == "📥 Input & Hasil Data":
                 </div>
             """, unsafe_allow_html=True)
         
-      with m_col2:
-        val_warning = len(st.session_state.b3_db[st.session_state.b3_db['Status'].astype(str).str.contains('Peringatan', case=False, na=False)]) if not st.session_state.b3_db.empty else 0
-        st.markdown(f"""
-        <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left;">
-            <span style="font-size: 13px; color: #64748b; font-weight: 600; display: block; margin-bottom: 5px;">JUMLAH WARNING</span>
-            <span style="font-size: 24px; font-weight: 700; color: #f59e0b; display: block;">{val_warning} Data</span>
-        </div>
-        """, unsafe_allow_html=True)
+          with m_col2:
+            val_warning = len(st.session_state.b3_db[st.session_state.b3_db['Status'].astype(str).str.contains('Peringatan', case=False, na=False)]) if not st.session_state.b3_db.empty else 0
+            st.markdown(f"""
+            <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); text-align: left;">
+                <span style="font-size: 13px; color: #64748b; font-weight: 600; display: block; margin-bottom: 5px;">JUMLAH WARNING</span>
+                <span style="font-size: 24px; font-weight: 700; color: #f59e0b; display: block;">{val_warning} Data</span>
+            </div>
+            """, unsafe_allow_html=True)
