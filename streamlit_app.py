@@ -234,35 +234,33 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     st.markdown("---")
+# --- KODE UNTUK MENGEMBALIKAN NAVIGASI KE SIDEBAR KIRI ---
+with st.sidebar:
+    st.markdown("---")
 
-# --- KODE BARU (SUDAH DIRAPIKAN INDENTASINYA) ---
+    menu_pilihan = st.radio(
+        "Pilih Menu Navigasi:",
+        ["🏠 Beranda Utama", "📊 Input & Hasil Data", "📋 Prosedur Kedaruratan & SOP", "ℹ️ Tentang & Regulasi"]
+    )
 
-st.markdown("---")
+    st.markdown("---")
 
-# # Pastikan tidak ada spasi sisa di awal baris jika ini di tingkat utama (global scope)
-menu_pilihan = st.radio(
-    "Pilih Menu Navigasi:",
-    ["🏠 Beranda Utama", "📊 Input & Hasil Data", "📋 Prosedur Kedaruratan & SOP", "ℹ️ Tentang & Regulasi"]
-)
+    # --- KOTAK NAMA ANGGOTA KELOMPOK BARU ---
+    st.markdown("""
+    <div style="background-color: rgba(255, 255, 255, 0.08); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
+        <b style="color: #f59e0b; font-size: 14px; display: block; margin-bottom: 6px; letter-spacing: 0.5px;">👥 KELOMPOK 4:</b>
+        <ul style="color: #ffffff; font-size: 13px; padding-left: 16px; margin: 0; line-height: 1.4;">
+            <li>Ajeng Ayu Dyah Putri</li>
+            <li>Fathiyya Rizkyana</li>
+            <li>Nadine Nareshwari Radisti</li>
+            <li>Namina Ratu Chessa Juniar</li>
+            <li>Naura Khairunnisa Istiadi</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
 
-st.markdown("---")
-
-# --- KOTAK NAMA ANGGOTA KELOMPOK BARU ---
-st.markdown("""
-<div style="background-color: rgba(255, 255, 255, 0.08); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);">
-    <b style="color: #f59e0b; font-size: 14px; display: block; margin-bottom: 6px; letter-spacing: 0.5px;">👥 KELOMPOK 4:</b>
-    <ul style="color: #ffffff; font-size: 13px; padding-left: 16px; margin: 0; line-height: 1.4;">
-        <li>Ajeng Ayu Dyah Putri</li>
-        <li>Fathiyya Rizkyana</li>
-        <li>Nadine Nareshwari Radisti</li>
-        <li>Namina Ratu Chessa Juniar</li>
-        <li>Naura Khairunnisa Istiadi</li>
-    </ul>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("<br>", unsafe_allow_html=True)
-st.caption("Storify Waste v1.0")
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.caption("Storify Waste v1.0")
 # ==================== LOGIKA HALAMAN UTAMA ====================
 
 # 📑 MENU 1: BERANDA UTAMA
